@@ -1,0 +1,127 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_oE6JU2aiEUVDyjZH",
+        "type": "tab",
+        "createdDate": "2024-06-25T10:13:43.508Z",
+        "label": "check_If_Exist",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "check_If_Exist",
+        "relativeParentPath": ""
+    },
+    {
+        "id": "sd_F9CrOrETPPnaRNnz",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_oE6JU2aiEUVDyjZH",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "check if exist",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "searchObj",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "result",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "checkIfExist",
+        "category": "General",
+        "x": 105,
+        "y": 100,
+        "wires": [
+            [
+                "sd_IkEWJgc7OLnOAKlU"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "check_If_Exist",
+        "generated": false
+    },
+    {
+        "id": "sd_IkEWJgc7OLnOAKlU",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_oE6JU2aiEUVDyjZH",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "databaseConfig": "sd_qC5Zfy7LJYHmxiFv",
+        "collection": "bh.input.searchObj.collection",
+        "options": "bh.option",
+        "resultMapping": "bh.local.result",
+        "operation": "find",
+        "argumentArray": [
+            "query",
+            "options"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh.input.searchObj.query",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "sd_IkEWJgc7OLnOAKlU",
+        "category": "Storage",
+        "x": 225,
+        "y": 100,
+        "wires": [
+            []
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "bh.input",
+                "value": "searchObj.collection",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "option",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "result",
+                "constant": false
+            },
+            "query": {
+                "type": "bh.input",
+                "value": "searchObj.query",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "check_If_Exist",
+        "generated": true
+    }
+]

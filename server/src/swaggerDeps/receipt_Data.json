@@ -1,0 +1,15 @@
+{
+    "/add-receipt-data": {
+        "post": {
+            "summary": "",
+            "description": "",
+            "consumes": [],
+            "produces": [],
+            "parameters": [],
+            "responses": {},
+            "tags": [
+                "receipt_Data"
+            ]
+        }
+    }
+}

@@ -1,0 +1,220 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
+        "type": "tab",
+        "createdDate": "2024-06-26T08:01:53.097Z",
+        "label": "receipt_Data",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "receipt_Data",
+        "relativeParentPath": ""
+    },
+    {
+        "id": "sd_xzCUM8CG8MjFdgah",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "add-receipt-data",
+        "path": "/add-receipt-data",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 120,
+        "y": 80,
+        "wires": [
+            [
+                "sd_4tGwLR1woumnEG5V"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "receipt_Data",
+        "functionName": "sd_xzCUM8CG8MjFdgah"
+    },
+    {
+        "id": "sd_4tGwLR1woumnEG5V",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.receiptData = {\n    collection : \"ReceiptData\",\n}\n\nbh.input.body['Date-Uploaded'] = new Date()\n",
+        "functionName": "sd_4tGwLR1woumnEG5V",
+        "category": "Function",
+        "x": 225,
+        "y": 80,
+        "wires": [
+            [
+                "sd_lMVmdpYxUo2oWmbL"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "receipt_Data",
+        "generated": true
+    },
+    {
+        "id": "sd_lMVmdpYxUo2oWmbL",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "databaseConfig": "sd_qC5Zfy7LJYHmxiFv",
+        "collection": "bh.receiptData.ReceiptData",
+        "options": "bh.option",
+        "resultMapping": "bh.result",
+        "operation": "insertOne",
+        "argumentArray": [
+            "document",
+            "options"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "bh.input.body",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "sd_lMVmdpYxUo2oWmbL",
+        "category": "Storage",
+        "x": 385,
+        "y": 80,
+        "wires": [
+            [
+                "sd_dYMiPVLrPaRRhOnO"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "bh",
+                "value": "receiptData.ReceiptData",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "option",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh",
+                "value": "result",
+                "constant": false
+            },
+            "query": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            },
+            "document": {
+                "type": "bh",
+                "value": "input.body",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "receipt_Data",
+        "generated": true
+    },
+    {
+        "id": "sd_dYMiPVLrPaRRhOnO",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh",
+            "value": "result",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 200,
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": 200,
+            "obj": "bh.result",
+            "send": "bh.result"
+        },
+        "dataModelIsArray": false,
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_dYMiPVLrPaRRhOnO",
+        "category": "HTTP",
+        "x": 525,
+        "y": 80,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "receipt_Data",
+        "generated": true
+    }
+]

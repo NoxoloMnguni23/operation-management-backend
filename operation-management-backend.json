@@ -1,0 +1,13 @@
+{
+    "displayName": "Operation-Management-Backend",
+    "appName": "operation-management-backend",
+    "description": "Operation-Management-backend",
+    "lastModified": "2024-06-20T12:56:16.975Z",
+    "imgSourcePath": "",
+    "version": "1.0.0",
+    "appType": "apiOnly",
+    "templateName": "blank",
+    "createDate": "2024-06-20T12:55:58.606Z",
+    "analyticsId": "7bcc6457-0624-f100-4400-afa7a5b2968d",
+    "createdStudioVersion": "9.2.1"
+}

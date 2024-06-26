@@ -1,0 +1,28 @@
+{
+    "/add-budget": {
+        "post": {
+            "summary": "",
+            "description": "",
+            "consumes": [],
+            "produces": [],
+            "parameters": [],
+            "responses": {},
+            "tags": [
+                "budget"
+            ]
+        }
+    },
+    "/get-budget/:dateUpload": {
+        "get": {
+            "summary": "",
+            "description": "",
+            "consumes": [],
+            "produces": [],
+            "parameters": [],
+            "responses": {},
+            "tags": [
+                "budget"
+            ]
+        }
+    }
+}
