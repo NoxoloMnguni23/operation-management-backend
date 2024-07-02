@@ -1,4 +1,6 @@
 //CORE_REFERENCE_IMPORTS
+//CORE_REFERENCE_IMPORT-ocr-SSD_SERVICE_ID_sd_1RxXDB7XjkTrZjIK
+import { ocr as SSD_SERVICE_ID_sd_1RxXDB7XjkTrZjIK } from './sd-services/ocr';
 //CORE_REFERENCE_IMPORT-receipt_Data-SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp
 import { receipt_Data as SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp } from './sd-services/receipt_Data';
 //CORE_REFERENCE_IMPORT-budget-SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa
@@ -10,6 +12,8 @@ import { receipts_File as SSD_SERVICE_ID_sd_E65ytoCUunRWk8wH } from './sd-servic
 
 export const UserRoutes = [
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-ocr-SSD_SERVICE_ID_sd_1RxXDB7XjkTrZjIK
+SSD_SERVICE_ID_sd_1RxXDB7XjkTrZjIK,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-receipt_Data-SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp
 SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-budget-SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa

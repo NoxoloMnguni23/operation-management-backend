@@ -64,7 +64,8 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "budget",
-        "functionName": "sd_gF08MNw4SN5zBKyt"
+        "functionName": "sd_gF08MNw4SN5zBKyt",
+        "generated": false
     },
     {
         "id": "sd_IDFAuaOfSGXRv0ai",
@@ -272,7 +273,8 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "budget",
-        "functionName": "sd_fo6SnfxXCvjHOBfU"
+        "functionName": "sd_fo6SnfxXCvjHOBfU",
+        "generated": false
     },
     {
         "id": "sd_EUCHhxbQxcRHSqzU",
@@ -354,9 +356,9 @@
             ]
         ],
         "__n_excludedFromValidation__": {},
+        "generated": true,
         "generateNext": false,
-        "serviceName": "budget",
-        "generated": true
+        "serviceName": "budget"
     },
     {
         "id": "sd_Os2S07eALISUhqc3",
