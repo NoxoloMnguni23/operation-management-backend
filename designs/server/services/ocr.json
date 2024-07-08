@@ -1,0 +1,257 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_1RxXDB7XjkTrZjIK",
+        "type": "tab",
+        "createdDate": "2024-06-26T08:45:27.192Z",
+        "label": "ocr",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "ocr",
+        "relativeParentPath": ""
+    },
+    {
+        "id": "sd_huOIMSMcaHm4VmmR",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_1RxXDB7XjkTrZjIK",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "Upload",
+        "path": "/upload-image",
+        "uploadpath": "\"file\"",
+        "summary": "",
+        "description": "",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": true,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "uploadFileOptions": {
+            "type": "path",
+            "fileOptions": [
+                {
+                    "name": "file",
+                    "maxCount": 1
+                }
+            ],
+            "path": "\"file\""
+        },
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "fileoptions": [
+                {
+                    "key": "file",
+                    "value": "1",
+                    "rowId": "sd_zHj4ABRn3jSweYEt",
+                    "valid": true
+                }
+            ],
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 65,
+        "y": 140,
+        "wires": [
+            [
+                "sd_0JXC2OHbYKtvbk31"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "file",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ocr",
+        "functionName": "sd_huOIMSMcaHm4VmmR"
+    },
+    {
+        "id": "sd_0JXC2OHbYKtvbk31",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_1RxXDB7XjkTrZjIK",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "const Tesseract = require('tesseract.js');\nbh.filePath = bh.input.files.file[0].path\n\nconst extractField = (text, keyword) => {\n    const regex = new RegExp(`${keyword}[:\\\\s]*([\\\\d,\\\\.]+)`, 'i');\n    const match = text.match(regex);\n    return match ? match[1] : '';\n};\n\nconst extractDate = (text) => {\n    const datePatterns = [\n        /\\b\\d{2}\\/\\d{2}\\/\\d{4}\\b/,  // MM/DD/YYYY\n        /\\b\\d{4}\\/\\d{2}\\/\\d{2}\\b/,  // YYYY/MM/DD\n        /\\b\\d{2}-\\d{2}-\\d{4}\\b/,    // MM-DD-YYYY\n        /\\b\\d{4}-\\d{2}-\\d{2}\\b/     // YYYY-MM-DD\n    ];\n\n    for (const pattern of datePatterns) {\n        const match = text.match(pattern);\n        if (match) {\n            return match[0];\n        }\n    }\n    return '';\n};\n//Pattern to return time on a recipt\nconst timePattern = /\\b((1[0-2]|0?[1-9]):[0-5][0-9](\\s)?([AP][M])|([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?)\\b/g;\n//Pattern to return any number that ends with .00\nconst numberPattern = /\\b-?\\d+\\.00\\b/g;\n// Pattern for items\nconst itemPattern = /([A-Za-z\\s]+)\\s+\\.{2,}\\s+\\$?(\\d+\\.\\d{2})/g;\n\nconst items = [];\nlet match;\n\nfunction data() {\n    return new Promise(async (resolve, reject) => {\n        await Tesseract.recognize(\n            bh.filePath,\n            'eng',\n            { logger: m => console.log(m) }\n        ).then(({ data: { text } }) => {\n            // bh.result = bh.input.files.file[0];\n            // bh.result.extractedText = text;\n            // const totalAmount = extractField(text, 'Total');\n            // const item = extractField(text, 'Items');\n            // const change = extractField(text, 'Change');\n            // const date = extractDate(text);\n            // const times = text.match(timePattern);\n            // const cashPrice = text.match(numberPattern);\n            // if (cashPrice) {\n            //     const numericValues = cashPrice.map(num => parseFloat(num));\n            //     const highestNumber = Math.max(...numericValues);\n            //     console.log(\"Cash price:\", highestNumber)\n            // }\n            // while ((match = itemPattern.exec(text)) !== null) {\n            //     const item = {\n            //         name: match[1].trim(),\n            //         price: parseFloat(match[2])\n            //     };\n            //     items.push(item);\n            // }\n            // console.log(\"total Amount:\", totalAmount)\n            // console.log(\"total Items:\", item)\n            // console.log(\"total Change:\", change)\n            // console.log(\"Date:\", date)\n            // console.log(\"Times:\", times[0])\n            console.log('Text:', text);\n            resolve()\n        }).catch(err => {\n            console.log(\"Error reading Image\", err);\n            rejecte()\n        });\n    })\n}\n\nawait data();",
+        "functionName": "sd_0JXC2OHbYKtvbk31",
+        "category": "Function",
+        "x": 165,
+        "y": 140,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "ocr",
+        "generated": true
+    },
+    {
+        "id": "sd_rC0bSkbrsLtUr1Dp",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_1RxXDB7XjkTrZjIK",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "databaseConfig": "sd_qC5Zfy7LJYHmxiFv",
+        "collection": "\"files\"",
+        "options": "bh.option",
+        "resultMapping": "bh.data",
+        "operation": "insertOne",
+        "argumentArray": [
+            "document",
+            "options"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "bh.result",
+        "newName": "",
+        "doc": "",
+        "filePath": "bh.result.path",
+        "fileName": "bh.result.filename",
+        "pipeline": "",
+        "functionName": "sd_rC0bSkbrsLtUr1Dp",
+        "category": "Storage",
+        "x": 280,
+        "y": 140,
+        "wires": [
+            [
+                "sd_lk90MLmceMdSEd5i"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "str",
+                "value": "files",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "option",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh",
+                "value": "data",
+                "constant": false
+            },
+            "query": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            },
+            "document": {
+                "type": "bh",
+                "value": "result",
+                "constant": false
+            },
+            "filePath": {
+                "type": "bh",
+                "value": "result.path",
+                "constant": false
+            },
+            "fileName": {
+                "type": "bh",
+                "value": "result.filename",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ocr"
+    },
+    {
+        "id": "sd_lk90MLmceMdSEd5i",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_1RxXDB7XjkTrZjIK",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh",
+            "value": "data",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 200,
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": {
+                "type": "num",
+                "value": 200,
+                "ssd_typedInputField": true
+            },
+            "obj": {
+                "type": "bh",
+                "value": "data",
+                "ssd_typedInputField": true
+            },
+            "send": {
+                "type": "bh",
+                "value": "data",
+                "ssd_typedInputField": true
+            }
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_lk90MLmceMdSEd5i",
+        "category": "HTTP",
+        "x": 385,
+        "y": 140,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "ocr"
+    }
+]
