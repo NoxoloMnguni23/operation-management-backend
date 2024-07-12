@@ -145,9 +145,11 @@ export class ocr {
           /\b\d{4}-\d{2}-\d{2}\b/, // YYYY-MM-DD
         ];
 
+        console.log('Date patterns: ', datePatterns);
         for (const pattern of datePatterns) {
           const match = text.match(pattern);
           if (match) {
+            console.log(`Found match for ${pattern} is ${match}`);
             return match[0];
           }
         }
@@ -175,7 +177,7 @@ export class ocr {
               // const totalAmount = extractField(text, 'Total');
               // const item = extractField(text, 'Items');
               // const change = extractField(text, 'Change');
-              // const date = extractDate(text);
+              const date = extractDate(text);
               // const times = text.match(timePattern);
               // const cashPrice = text.match(numberPattern);
               // if (cashPrice) {
