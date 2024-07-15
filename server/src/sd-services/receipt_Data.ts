@@ -9,6 +9,7 @@ import { SDBaseService } from '../services/SDBaseService'; //_splitter_
 import { TracerService } from '../services/TracerService'; //_splitter_
 import log from '../utils/Logger'; //_splitter_
 import { MongoPersistance } from '../utils/ndefault-mongodb/Mongodb/MongoPersistance'; //_splitter_
+import * as SSD_SERVICE_ID_sd_oE6JU2aiEUVDyjZH from './check_If_Exist'; //_splitter_
 //append_imports_end
 export class receipt_Data {
   private sdService = new SDBaseService();
@@ -132,10 +133,10 @@ export class receipt_Data {
             next
           );
           let parentSpanInst = null;
-          bh = await this.sd_oAIXs1g6MtIZlgDJ(bh, parentSpanInst);
-          //appendnew_next_sd_32rFD19v7gcBKDMU
+          bh = await this.sd_fyuH8bSVxuO0uo7j(bh, parentSpanInst);
+          //appendnew_next_sd_LITkUuuJlYXmnDvY
         } catch (e) {
-          return await this.errorHandler(bh, e, 'sd_32rFD19v7gcBKDMU');
+          return await this.errorHandler(bh, e, 'sd_LITkUuuJlYXmnDvY');
         }
       },
       this.sdService.getMiddlesWaresBySequenceId(
@@ -221,13 +222,13 @@ export class receipt_Data {
     }
   }
 
-  async sd_oAIXs1g6MtIZlgDJ(bh, parentSpanInst) {
+  async sd_fyuH8bSVxuO0uo7j(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'sd_oAIXs1g6MtIZlgDJ',
+      'sd_fyuH8bSVxuO0uo7j',
       parentSpanInst
     );
     try {
-      bh.receiptData = {
+      bh.search = {
         collection: 'ReceiptData',
       };
 
@@ -235,33 +236,60 @@ export class receipt_Data {
 
       console.log('GET');
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_iNNNA6psRGdvVtM5(bh, parentSpanInst);
-      //appendnew_next_sd_oAIXs1g6MtIZlgDJ
+      bh = await this.sd_U7pG547mdq0aUxFN(bh, parentSpanInst);
+      //appendnew_next_sd_TXoyfmFyhkKfpxNX
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_oAIXs1g6MtIZlgDJ',
+        'sd_TXoyfmFyhkKfpxNX',
         spanInst,
-        'sd_oAIXs1g6MtIZlgDJ'
+        'sd_TXoyfmFyhkKfpxNX'
       );
     }
   }
 
-  async sd_iNNNA6psRGdvVtM5(bh, parentSpanInst) {
+  async sd_U7pG547mdq0aUxFN(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'sd_iNNNA6psRGdvVtM5',
+      'sd_U7pG547mdq0aUxFN',
       parentSpanInst
     );
     try {
-      bh.result = await MongoPersistance.getInstance().find(
-        'sd_qC5Zfy7LJYHmxiFv',
-        bh.receiptData.collection,
-        bh.opt,
-        bh.option,
-        bh.option
+      if (
+        this.sdService.operators['nempty'](
+          bh.result,
+          undefined,
+          undefined,
+          undefined
+        )
+      ) {
+        bh = await this.sd_8j6lVUel7NUEAqev(bh, parentSpanInst);
+      } else {
+        bh = await this.sd_LU1PH9RfXJPrFRd2(bh, parentSpanInst);
+      }
+      this.tracerService.sendData(spanInst, bh);
+
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_U7pG547mdq0aUxFN',
+        spanInst,
+        'sd_U7pG547mdq0aUxFN'
       );
+    }
+  }
+
+  async sd_8j6lVUel7NUEAqev(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_8j6lVUel7NUEAqev',
+      parentSpanInst
+    );
+    try {
+      console.log('bh', bh);
+      bh.status = 200;
       this.tracerService.sendData(spanInst, bh);
       await this.sd_P1AwM7n0uPqyUNwU(bh, parentSpanInst);
       this.sd_kqtW7EvUAULF7NmJ(bh, parentSpanInst);
@@ -271,16 +299,16 @@ export class receipt_Data {
       return await this.errorHandler(
         bh,
         e,
-        'sd_iNNNA6psRGdvVtM5',
+        'sd_8j6lVUel7NUEAqev',
         spanInst,
-        'sd_iNNNA6psRGdvVtM5'
+        'sd_8j6lVUel7NUEAqev'
       );
     }
   }
 
-  async sd_P1AwM7n0uPqyUNwU(bh, parentSpanInst) {
+  async sd_y9LnKoKdcGXQibly(bh, parentSpanInst) {
     try {
-      bh.web.res.status(200).send(bh.result);
+      bh.web.res.status(bh.status).send(bh.result);
 
       return bh;
     } catch (e) {

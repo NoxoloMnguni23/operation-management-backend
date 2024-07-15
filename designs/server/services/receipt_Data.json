@@ -220,7 +220,7 @@
         "generated": true
     },
     {
-        "id": "sd_32rFD19v7gcBKDMU",
+        "id": "sd_LITkUuuJlYXmnDvY",
         "type": "HttpIn",
         "z": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
         "viewType": "server",
@@ -254,11 +254,11 @@
         "outputs": 1,
         "validateRequestUsingSwaggerDocs": false,
         "category": "HTTP",
-        "x": 120,
-        "y": 240,
+        "x": 125,
+        "y": 200,
         "wires": [
             [
-                "sd_oAIXs1g6MtIZlgDJ"
+                "sd_fyuH8bSVxuO0uo7j"
             ]
         ],
         "__ssdTypeInputs__": {
@@ -273,10 +273,10 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "receipt_Data",
-        "functionName": "sd_32rFD19v7gcBKDMU"
+        "functionName": "sd_LITkUuuJlYXmnDvY"
     },
     {
-        "id": "sd_oAIXs1g6MtIZlgDJ",
+        "id": "sd_fyuH8bSVxuO0uo7j",
         "type": "Script",
         "z": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
         "viewType": "common",
@@ -285,11 +285,11 @@
         "script": "bh.receiptData = {\n    collection : \"ReceiptData\",\n}\n\nbh.input.body['Date-Uploaded'] = new Date().toLocaleDateString()\n\nconsole.log('GET')",
         "functionName": "sd_oAIXs1g6MtIZlgDJ",
         "category": "Function",
-        "x": 225,
-        "y": 240,
+        "x": 245,
+        "y": 200,
         "wires": [
             [
-                "sd_iNNNA6psRGdvVtM5"
+                "sd_TXoyfmFyhkKfpxNX"
             ]
         ],
         "__n_excludedFromValidation__": {},
@@ -298,85 +298,152 @@
         "generated": true
     },
     {
-        "id": "sd_iNNNA6psRGdvVtM5",
-        "type": "Mongodb",
+        "id": "sd_TXoyfmFyhkKfpxNX",
+        "type": "CallService",
         "z": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
-        "viewType": "server",
+        "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "databaseConfig": "sd_qC5Zfy7LJYHmxiFv",
-        "collection": "bh.receiptData.collection",
-        "options": "bh.option",
-        "resultMapping": "bh.result",
-        "operation": "find",
-        "argumentArray": [
-            "query",
-            "options"
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_oE6JU2aiEUVDyjZH",
+            "type": "tab",
+            "createdDate": "2024-06-25T10:13:43.508Z",
+            "label": "check_If_Exist",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_F9CrOrETPPnaRNnz",
+            "flowName": "checkIfExist"
+        },
+        "inputVariables": [
+            {
+                "key": "searchObj",
+                "map": true,
+                "valueType": "bh",
+                "value": "search"
+            }
         ],
-        "aggregate": "",
-        "operations": "",
-        "query": "bh.opt",
-        "fieldOrSpec": "",
-        "filter": "",
-        "key": "",
-        "docId": "",
-        "indexName": "",
-        "replacement": "",
-        "update": "",
-        "xAxis": "",
-        "yAxis": "",
-        "indexes": "",
-        "docs": "",
-        "document": "bh",
-        "newName": "",
-        "doc": "",
-        "filePath": "",
-        "fileName": "",
-        "pipeline": "",
-        "functionName": "sd_iNNNA6psRGdvVtM5",
-        "category": "Storage",
-        "x": 385,
-        "y": 240,
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "result",
+                "valueType": "bh",
+                "value": "result",
+                "mapVarName": "result",
+                "localVar": "bh.result"
+            }
+        ],
+        "callService": "./check_If_Exist",
+        "startName": "checkIfExist",
+        "inputParams": [
+            "bh.search"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_TXoyfmFyhkKfpxNX",
+        "category": "General",
+        "x": 400,
+        "y": 200,
         "wires": [
             [
-                "sd_P1AwM7n0uPqyUNwU",
+                "sd_U7pG547mdq0aUxFN",
                 "sd_kqtW7EvUAULF7NmJ"
             ]
         ],
-        "__ssdTypeInputs__": {
-            "collection": {
-                "type": "bh",
-                "value": "receiptData.collection",
-                "constant": false
-            },
-            "options": {
-                "type": "bh",
-                "value": "option",
-                "constant": false
-            },
-            "resultMapping": {
-                "type": "bh",
-                "value": "result",
-                "constant": false
-            },
-            "query": {
-                "type": "bh",
-                "value": "opt",
-                "constant": false
-            },
-            "document": {
-                "type": "bh",
-                "value": "",
-                "constant": false
-            }
-        },
         "__n_excludedFromValidation__": {},
         "generateNext": false,
         "serviceName": "receipt_Data",
         "generated": true
     },
     {
-        "id": "sd_P1AwM7n0uPqyUNwU",
+        "id": "sd_U7pG547mdq0aUxFN",
+        "type": "Switch",
+        "z": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "property": "result",
+        "propertyType": "bh",
+        "propertyGv": "bh.result",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_U7pG547mdq0aUxFN",
+        "category": "Function",
+        "x": 560,
+        "y": 200,
+        "wires": [
+            [
+                "sd_8j6lVUel7NUEAqev"
+            ],
+            [
+                "sd_LU1PH9RfXJPrFRd2"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "receipt_Data",
+        "generated": true
+    },
+    {
+        "id": "sd_8j6lVUel7NUEAqev",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(\"bh\", bh)\nbh.status = 200",
+        "functionName": "sd_8j6lVUel7NUEAqev",
+        "category": "Function",
+        "x": 685,
+        "y": 160,
+        "wires": [
+            [
+                "sd_y9LnKoKdcGXQibly"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "receipt_Data",
+        "generated": true
+    },
+    {
+        "id": "sd_LU1PH9RfXJPrFRd2",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.status = 404\nbh.result = {\n    message: \"Nothing found\"\n}",
+        "functionName": "sd_LU1PH9RfXJPrFRd2",
+        "category": "Function",
+        "x": 685,
+        "y": 260,
+        "wires": [
+            [
+                "sd_y9LnKoKdcGXQibly"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "receipt_Data",
+        "generated": true
+    },
+    {
+        "id": "sd_y9LnKoKdcGXQibly",
         "type": "HttpOut",
         "z": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
         "viewType": "server",
@@ -389,14 +456,14 @@
             "ssd_typedInputField": true
         },
         "httpcode": {
-            "type": "num",
-            "value": 200,
+            "type": "bh",
+            "value": "status",
             "ssd_typedInputField": true
         },
         "responseType": "obj",
         "swaggerResponse": {},
         "responseMapping": {
-            "status": 200,
+            "status": "bh.status",
             "obj": "bh.result",
             "send": "bh.result"
         },
@@ -418,10 +485,10 @@
             "headers": "Map",
             "cookies": "Map"
         },
-        "functionName": "sd_P1AwM7n0uPqyUNwU",
+        "functionName": "sd_y9LnKoKdcGXQibly",
         "category": "HTTP",
-        "x": 525,
-        "y": 240,
+        "x": 860,
+        "y": 200,
         "wires": [],
         "__n_excludedFromValidation__": {},
         "generateNext": false,
