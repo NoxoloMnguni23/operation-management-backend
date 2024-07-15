@@ -30,6 +30,7 @@
         "acceptFileUpload": false,
         "useDataModel": false,
         "dataModelIsArray": false,
+        "uploadFileOptions": "",
         "erd": "",
         "erdName": "",
         "entity": "",
@@ -219,213 +220,6 @@
         "generated": true
     },
     {
-        "id": "sd_32rFD19v7gcBKDMU",
-        "type": "HttpIn",
-        "z": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
-        "viewType": "server",
-        "nodeType": "start",
-        "name": "get-receipt-data",
-        "path": "/get-receipt-data",
-        "uploadpath": "",
-        "summary": "",
-        "description": "",
-        "method": "get",
-        "sequenceId": "",
-        "consumes": "",
-        "produces": "",
-        "filetype": "path",
-        "acceptFileUpload": false,
-        "useDataModel": false,
-        "dataModelIsArray": false,
-        "erd": "",
-        "erdName": "",
-        "entity": "",
-        "entityId": "",
-        "ref": "",
-        "editableListData": {
-            "responses": [],
-            "params": [],
-            "produces": [],
-            "consumes": []
-        },
-        "inputs": 0,
-        "outputs": 1,
-        "validateRequestUsingSwaggerDocs": false,
-        "category": "HTTP",
-        "x": 120,
-        "y": 240,
-        "wires": [
-            [
-                "sd_oAIXs1g6MtIZlgDJ"
-            ]
-        ],
-        "__ssdTypeInputs__": {
-            "uploadpath": {
-                "type": "str",
-                "value": "",
-                "nullable": "true",
-                "nullableValue": "",
-                "constant": false
-            }
-        },
-        "__n_excludedFromValidation__": {},
-        "generateNext": true,
-        "serviceName": "receipt_Data",
-        "functionName": "sd_32rFD19v7gcBKDMU"
-    },
-    {
-        "id": "sd_oAIXs1g6MtIZlgDJ",
-        "type": "Script",
-        "z": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "",
-        "script": "bh.receiptData = {\n    collection : \"ReceiptData\",\n}\n\nbh.input.body['Date-Uploaded'] = new Date().toLocaleDateString()",
-        "functionName": "sd_oAIXs1g6MtIZlgDJ",
-        "category": "Function",
-        "x": 225,
-        "y": 240,
-        "wires": [
-            [
-                "sd_iNNNA6psRGdvVtM5"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "receipt_Data",
-        "generated": true
-    },
-    {
-        "id": "sd_iNNNA6psRGdvVtM5",
-        "type": "Mongodb",
-        "z": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
-        "viewType": "server",
-        "nodeType": "flow",
-        "name": "",
-        "databaseConfig": "sd_qC5Zfy7LJYHmxiFv",
-        "collection": "bh.receiptData.collection",
-        "options": "bh.option",
-        "resultMapping": "bh.result",
-        "operation": "find",
-        "argumentArray": [
-            "query",
-            "options"
-        ],
-        "aggregate": "",
-        "operations": "",
-        "query": "bh.opt",
-        "fieldOrSpec": "",
-        "filter": "",
-        "key": "",
-        "docId": "",
-        "indexName": "",
-        "replacement": "",
-        "update": "",
-        "xAxis": "",
-        "yAxis": "",
-        "indexes": "",
-        "docs": "",
-        "document": "bh",
-        "newName": "",
-        "doc": "",
-        "filePath": "",
-        "fileName": "",
-        "pipeline": "",
-        "functionName": "sd_iNNNA6psRGdvVtM5",
-        "category": "Storage",
-        "x": 385,
-        "y": 240,
-        "wires": [
-            [
-                "sd_P1AwM7n0uPqyUNwU"
-            ]
-        ],
-        "__ssdTypeInputs__": {
-            "collection": {
-                "type": "bh",
-                "value": "receiptData.collection",
-                "constant": false
-            },
-            "options": {
-                "type": "bh",
-                "value": "option",
-                "constant": false
-            },
-            "resultMapping": {
-                "type": "bh",
-                "value": "result",
-                "constant": false
-            },
-            "query": {
-                "type": "bh",
-                "value": "opt",
-                "constant": false
-            },
-            "document": {
-                "type": "bh",
-                "value": "",
-                "constant": false
-            }
-        },
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "receipt_Data",
-        "generated": true
-    },
-    {
-        "id": "sd_P1AwM7n0uPqyUNwU",
-        "type": "HttpOut",
-        "z": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
-        "viewType": "server",
-        "nodeType": "flow",
-        "name": "",
-        "headers": {},
-        "responseBody": {
-            "type": "bh",
-            "value": "result",
-            "ssd_typedInputField": true
-        },
-        "httpcode": {
-            "type": "num",
-            "value": 200,
-            "ssd_typedInputField": true
-        },
-        "responseType": "obj",
-        "swaggerResponse": {},
-        "responseMapping": {
-            "status": 200,
-            "obj": "bh.result",
-            "send": "bh.result"
-        },
-        "dataModelIsArray": false,
-        "cookies": [],
-        "inputs": 1,
-        "outputs": 0,
-        "erd": "",
-        "entity": "",
-        "entityId": "",
-        "ref": "",
-        "editableListData": {
-            "headers": [],
-            "produces": [],
-            "responses": []
-        },
-        "cookiesList": {},
-        "switchStates": {
-            "headers": "Map",
-            "cookies": "Map"
-        },
-        "functionName": "sd_P1AwM7n0uPqyUNwU",
-        "category": "HTTP",
-        "x": 525,
-        "y": 240,
-        "wires": [],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "receipt_Data",
-        "generated": true
-    },
-    {
         "id": "sd_LITkUuuJlYXmnDvY",
         "type": "HttpIn",
         "z": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
@@ -444,6 +238,7 @@
         "acceptFileUpload": false,
         "useDataModel": false,
         "dataModelIsArray": false,
+        "uploadFileOptions": "",
         "erd": "",
         "erdName": "",
         "entity": "",
@@ -672,6 +467,7 @@
             "send": "bh.result"
         },
         "dataModelIsArray": false,
+        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "erd": "",
