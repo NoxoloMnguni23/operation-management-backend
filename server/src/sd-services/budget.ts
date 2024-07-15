@@ -506,10 +506,9 @@ export class budget {
     try {
       bh.search = {
         collection: 'budget',
-        query: bh.year,
       };
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_etWvFXyKMezM65wW(bh, parentSpanInst);
+      bh = await this.sd_0KMj85zQVdsCqOn3(bh, parentSpanInst);
       //appendnew_next_sd_EUCHhxbQxcRHSqzU
       return bh;
     } catch (e) {
@@ -523,26 +522,30 @@ export class budget {
     }
   }
 
-  async sd_etWvFXyKMezM65wW(bh, parentSpanInst) {
+  async sd_0KMj85zQVdsCqOn3(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'sd_etWvFXyKMezM65wW',
+      'sd_0KMj85zQVdsCqOn3',
       parentSpanInst
     );
     try {
-      let outputVariables = await this.checkIfExist(spanInst, bh.search);
-      bh.budget = outputVariables.local.result;
-
+      bh.budget = await MongoPersistance.getInstance().find(
+        'sd_qC5Zfy7LJYHmxiFv',
+        bh.search.collection,
+        bh.query,
+        bh.option,
+        bh.option
+      );
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_Os2S07eALISUhqc3(bh, parentSpanInst);
-      //appendnew_next_sd_etWvFXyKMezM65wW
+      //appendnew_next_sd_0KMj85zQVdsCqOn3
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_etWvFXyKMezM65wW',
+        'sd_0KMj85zQVdsCqOn3',
         spanInst,
-        'sd_etWvFXyKMezM65wW'
+        'sd_0KMj85zQVdsCqOn3'
       );
     }
   }
@@ -555,7 +558,7 @@ export class budget {
     try {
       if (
         this.sdService.operators['nempty'](
-          bh.result,
+          bh.budget,
           undefined,
           undefined,
           undefined
@@ -585,25 +588,13 @@ export class budget {
       parentSpanInst
     );
     try {
-      bh.result = bh.result;
+      console.log('Budget:  ', bh.budget);
 
-      bh.query = bh.input.params;
-      console.log('params', bh.query);
+      bh.res = bh.budget;
 
-      bh.data = bh.result.map((_data) => {
-        return _data.dateUpload;
-      });
+      bh.status = 200;
 
-      bh.data.forEach((item, i) => {
-        if (item == bh.query.dateUpload) {
-          console.log('Found', bh.result[i]);
-          bh.result = bh.result[i];
-          bh.status = 200;
-        } else {
-          console.log('this months budget is not found');
-          bh.status = 404;
-        }
-      });
+      console.log('Res: ', bh.res);
       this.tracerService.sendData(spanInst, bh);
       await this.sd_EuNVuAaWrSkB4SyX(bh, parentSpanInst);
       //appendnew_next_sd_ccai8j555bqv4Nr3
@@ -621,7 +612,7 @@ export class budget {
 
   async sd_EuNVuAaWrSkB4SyX(bh, parentSpanInst) {
     try {
-      bh.web.res.status(bh.status).send(bh.result);
+      bh.web.res.status(bh.status).send(bh.res);
 
       return bh;
     } catch (e) {
@@ -635,7 +626,11 @@ export class budget {
       parentSpanInst
     );
     try {
+      console.log('Budget not found:  ', bh.budget);
+
       bh.status = 404;
+
+      bh.res = { Error: 'Budget for that year not found' };
 
       this.tracerService.sendData(spanInst, bh);
       await this.sd_EuNVuAaWrSkB4SyX(bh, parentSpanInst);
@@ -769,7 +764,7 @@ export class budget {
       parentSpanInst
     );
     try {
-      console.log(bh.budget);
+      console.log('Budget:  ', bh.budget);
 
       bh.res = bh.budget;
 
@@ -805,7 +800,7 @@ export class budget {
       parentSpanInst
     );
     try {
-      console.log(bh.budget);
+      console.log('Budget not found:  ', bh.budget);
 
       bh.status = 404;
 
