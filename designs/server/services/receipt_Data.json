@@ -74,7 +74,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "bh.receiptData = {\n    collection : \"ReceiptData\",\n}\n\nbh.input.body['Date-Uploaded'] = new Date()\nbh.input.body['fileid'] = bh.input.headers['fileid'] \n\n\nconsole.log()",
+        "script": "bh.receiptData = {\n    collection : \"ReceiptData\",\n}\n\n\n\nlet day = new Date().getDay() \nlet month = new Date().getMonth()\nlet year = new Date().getFullYear()\n\n\n\n\n\nbh.input.body['Date-Uploaded'] = day + '/' + month + '/' + year;\nbh.input.body['fileid'] = bh.input.headers['fileid'] \n\n\nconsole.log()",
         "functionName": "sd_4tGwLR1woumnEG5V",
         "category": "Function",
         "x": 225,
@@ -282,8 +282,8 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "bh.search = {\n    collection: 'ReceiptData'\n}\n\n",
-        "functionName": "sd_fyuH8bSVxuO0uo7j",
+        "script": "bh.receiptData = {\n    collection : \"ReceiptData\",\n}\n\nbh.input.body['Date-Uploaded'] = new Date().toLocaleDateString()\n\nconsole.log('GET')",
+        "functionName": "sd_oAIXs1g6MtIZlgDJ",
         "category": "Function",
         "x": 245,
         "y": 200,
@@ -351,7 +351,8 @@
         "y": 200,
         "wires": [
             [
-                "sd_U7pG547mdq0aUxFN"
+                "sd_U7pG547mdq0aUxFN",
+                "sd_kqtW7EvUAULF7NmJ"
             ]
         ],
         "__n_excludedFromValidation__": {},
@@ -489,6 +490,33 @@
         "x": 860,
         "y": 200,
         "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "receipt_Data",
+        "generated": true
+    },
+    {
+        "id": "sd_kqtW7EvUAULF7NmJ",
+        "type": "ServerLog",
+        "z": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 0,
+        "logObject": "bh.result",
+        "logLevel": "info",
+        "functionName": "sd_kqtW7EvUAULF7NmJ",
+        "category": "General",
+        "x": 525,
+        "y": 340,
+        "wires": [],
+        "__ssdTypeInputs__": {
+            "logObject": {
+                "type": "bh",
+                "value": "result",
+                "constant": false
+            }
+        },
         "__n_excludedFromValidation__": {},
         "generateNext": false,
         "serviceName": "receipt_Data",

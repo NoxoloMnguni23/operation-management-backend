@@ -4,7 +4,6 @@ let instance = null;
 //append_imports_start
 
 import * as cookieParser from 'cookie-parser'; //_splitter_
-import { sep } from 'path'; //_splitter_
 import { SDBaseService } from '../services/SDBaseService'; //_splitter_
 import { TracerService } from '../services/TracerService'; //_splitter_
 import log from '../utils/Logger'; //_splitter_
@@ -123,9 +122,8 @@ export class receipts_File {
         this.generatedMiddlewares
       ),
       this.sdService.multipartParser({
-        type: 'path',
-        path: 'file'.replace(/\\|\//g, sep),
-        options: [{ name: 'file', maxCount: 1 }],
+        type: 'memory',
+        options: [{ name: 'file', maxCount: 20000 }],
       }),
 
       async (req, res, next) => {
@@ -261,17 +259,43 @@ export class receipts_File {
       parentSpanInst
     );
     try {
+      console.log('file path find ', bh.input.files);
+      // bh.fileData = {
+      //     filePath : bh.input.files.file[0].buffer,
+      //     fileName : bh.input.files.file[0].filename,
+      //     collection : "files"
+
+      // }
+      bh.collection = 'files';
+      bh.path = bh.input.files.file[0].fieldname;
+
+      // const newImage = new Image();
+      //     newImage.name = req.file.originalname;
+      //     newImage.data = req.file.buffer; // Access the buffer containing file data
+      //     newImage.contentType = req.file.mimetype;
+      // bh.fileData = {
+      //     name : bh.input.files.file[0].originalname,
+      //     data : bh.input.files.file[0].buffer,
+      //     contentType:bh.input.files.file[0].mimetype,
+      //     filePath : bh.input.files.file[0].fieldname,
+      //     fileName : bh.input.files.file[0].originalname,
+      //     collection : "files"
+
+      // }
       bh.fileData = {
-        filePath: bh.input.files.file[0].path,
-        fileName: bh.input.files.file[0].filename,
-        collection: 'files',
+        filename: bh.input.files.file[0].originalname,
+        contentType: bh.input.files.file[0].mimetype,
+        data: bh.input.files.file[0].buffer,
+        size: bh.input.files.file[0].size,
+        fileid: bh.input.headers['fileid'],
       };
 
       bh.file = {};
-      bh.file.fileName = bh.input.files.file[0].filename;
+      bh.collection = 'files';
+      bh.file.fileName = bh.input.files.file[0].originalname;
       bh.file.fileid = bh.input.headers['fileid'];
 
-      console.log('Checking receipt file: ', bh.file);
+      console.log('Checking receipt file: ', bh);
 
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_aVrGcMzlRCoBrQMT(bh, parentSpanInst);
@@ -294,11 +318,10 @@ export class receipts_File {
       parentSpanInst
     );
     try {
-      bh.result = await MongoPersistance.getInstance().uploadFile(
+      bh.result = await MongoPersistance.getInstance().insertOne(
         'sd_qC5Zfy7LJYHmxiFv',
-        bh.fileData.collection,
-        bh.fileData.filePath,
-        bh.file,
+        bh.collection,
+        bh.fileData,
         bh.options,
         bh.options
       );
@@ -356,7 +379,7 @@ export class receipts_File {
     );
     try {
       bh.file = {
-        collection: 'files.files',
+        collection: 'files',
       };
 
       console.log('bh file', bh.file.collection);
@@ -514,9 +537,16 @@ export class receipts_File {
       parentSpanInst
     );
     try {
-      bh.file = {
-        collection: 'files.files',
+      bh.collection = 'files';
+
+      console.log('bh file', bh.input.params.filename);
+      // bh.input.params.collection = bh.collection;
+      bh.searchObj = {
+        collection: bh.collection,
+        filter: { fileid: bh.input.params.filename },
       };
+      console.log('bh', bh);
+
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_qXO87wPTptbovEe0(bh, parentSpanInst);
       //appendnew_next_sd_Z7jmrS6fMYZX0Ao3
@@ -543,7 +573,7 @@ export class receipts_File {
       let outputVariables =
         await SSD_SERVICE_ID_sd_oE6JU2aiEUVDyjZHInstance.checkIfExist(
           spanInst,
-          bh.file
+          bh.searchObj
         );
       bh.result = outputVariables.local.result;
 
@@ -602,16 +632,17 @@ export class receipts_File {
     try {
       bh.result = bh.result;
       bh.filter;
-      const data = bh.result.map((_data) => {
-        return _data.filename;
-      });
+      console.log('VOID', bh);
+      // const data = bh.result.map(_data=>{
+      //    return _data.filename
+      // })
 
-      data.forEach((_query) => {
-        bh.filter = { filename: _query };
-      });
+      //  data.forEach(_query=>{
+      //   bh.filter = {"filename":_query}
+      // })
 
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_X7PnVTcZRPTLWvnw(bh, parentSpanInst);
+      bh = await this.sd_xEHB5WqMypBahPEr(bh, parentSpanInst);
       //appendnew_next_sd_fxmfCcXwknPq02dZ
       return bh;
     } catch (e) {
@@ -625,36 +656,34 @@ export class receipts_File {
     }
   }
 
-  async sd_X7PnVTcZRPTLWvnw(bh, parentSpanInst) {
+  async sd_xEHB5WqMypBahPEr(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'sd_X7PnVTcZRPTLWvnw',
+      'sd_xEHB5WqMypBahPEr',
       parentSpanInst
     );
     try {
-      bh.result = await MongoPersistance.getInstance().downloadFile(
-        'sd_qC5Zfy7LJYHmxiFv',
-        'files',
-        bh.filter,
-        bh
-      );
+      // bh.result.downloadStream = bh.result.metadata.filename.fileName;
+
+      // console.log("resukt",bh)
       this.tracerService.sendData(spanInst, bh);
       await this.sd_BhdOx7QniJ42fEpo(bh, parentSpanInst);
-      //appendnew_next_sd_X7PnVTcZRPTLWvnw
+      //appendnew_next_sd_xEHB5WqMypBahPEr
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_X7PnVTcZRPTLWvnw',
+        'sd_xEHB5WqMypBahPEr',
         spanInst,
-        'sd_X7PnVTcZRPTLWvnw'
+        'sd_xEHB5WqMypBahPEr'
       );
     }
   }
 
   async sd_BhdOx7QniJ42fEpo(bh, parentSpanInst) {
     try {
-      bh.result.downloadStream.pipe(bh.web.res);
+      bh.web.res.status(200).send(bh.result);
+
       return bh;
     } catch (e) {
       return await this.errorHandler(bh, e, 'sd_BhdOx7QniJ42fEpo');

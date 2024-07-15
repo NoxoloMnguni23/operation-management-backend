@@ -130,7 +130,7 @@ export class check_If_Exist {
       bh.local.result = await MongoPersistance.getInstance().find(
         'sd_qC5Zfy7LJYHmxiFv',
         bh.input.searchObj.collection,
-        bh.input.searchObj.query,
+        bh.input.searchObj.filter,
         bh.option,
         bh.option
       );

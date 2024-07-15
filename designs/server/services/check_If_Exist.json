@@ -51,8 +51,7 @@
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": true,
-        "serviceName": "check_If_Exist",
-        "generated": false
+        "serviceName": "check_If_Exist"
     },
     {
         "id": "sd_IkEWJgc7OLnOAKlU",
@@ -72,7 +71,7 @@
         ],
         "aggregate": "",
         "operations": "",
-        "query": "bh.input.searchObj.query",
+        "query": "bh.input.searchObj.filter",
         "fieldOrSpec": "",
         "filter": "",
         "key": "",
@@ -115,7 +114,7 @@
             },
             "query": {
                 "type": "bh.input",
-                "value": "searchObj.query",
+                "value": "searchObj.filter",
                 "constant": false
             }
         },

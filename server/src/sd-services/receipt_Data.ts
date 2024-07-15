@@ -4,6 +4,7 @@ let instance = null;
 //append_imports_start
 
 import * as cookieParser from 'cookie-parser'; //_splitter_
+import * as safeStringify from 'fast-safe-stringify'; //_splitter_
 import { SDBaseService } from '../services/SDBaseService'; //_splitter_
 import { TracerService } from '../services/TracerService'; //_splitter_
 import log from '../utils/Logger'; //_splitter_
@@ -160,7 +161,11 @@ export class receipt_Data {
         collection: 'ReceiptData',
       };
 
-      bh.input.body['Date-Uploaded'] = new Date();
+      let day = new Date().getDay();
+      let month = new Date().getMonth();
+      let year = new Date().getFullYear();
+
+      bh.input.body['Date-Uploaded'] = day + '/' + month + '/' + year;
       bh.input.body['fileid'] = bh.input.headers['fileid'];
 
       console.log();
@@ -227,36 +232,9 @@ export class receipt_Data {
         collection: 'ReceiptData',
       };
 
-      this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_TXoyfmFyhkKfpxNX(bh, parentSpanInst);
-      //appendnew_next_sd_fyuH8bSVxuO0uo7j
-      return bh;
-    } catch (e) {
-      return await this.errorHandler(
-        bh,
-        e,
-        'sd_fyuH8bSVxuO0uo7j',
-        spanInst,
-        'sd_fyuH8bSVxuO0uo7j'
-      );
-    }
-  }
+      bh.input.body['Date-Uploaded'] = new Date().toLocaleDateString();
 
-  async sd_TXoyfmFyhkKfpxNX(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan(
-      'sd_TXoyfmFyhkKfpxNX',
-      parentSpanInst
-    );
-    try {
-      const SSD_SERVICE_ID_sd_oE6JU2aiEUVDyjZHInstance: SSD_SERVICE_ID_sd_oE6JU2aiEUVDyjZH.check_If_Exist =
-        SSD_SERVICE_ID_sd_oE6JU2aiEUVDyjZH.check_If_Exist.getInstance();
-      let outputVariables =
-        await SSD_SERVICE_ID_sd_oE6JU2aiEUVDyjZHInstance.checkIfExist(
-          spanInst,
-          bh.search
-        );
-      bh.result = outputVariables.local.result;
-
+      console.log('GET');
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_U7pG547mdq0aUxFN(bh, parentSpanInst);
       //appendnew_next_sd_TXoyfmFyhkKfpxNX
@@ -313,8 +291,9 @@ export class receipt_Data {
       console.log('bh', bh);
       bh.status = 200;
       this.tracerService.sendData(spanInst, bh);
-      await this.sd_y9LnKoKdcGXQibly(bh, parentSpanInst);
-      //appendnew_next_sd_8j6lVUel7NUEAqev
+      await this.sd_P1AwM7n0uPqyUNwU(bh, parentSpanInst);
+      this.sd_kqtW7EvUAULF7NmJ(bh, parentSpanInst);
+      //appendnew_next_sd_iNNNA6psRGdvVtM5
       return bh;
     } catch (e) {
       return await this.errorHandler(
@@ -333,31 +312,32 @@ export class receipt_Data {
 
       return bh;
     } catch (e) {
-      return await this.errorHandler(bh, e, 'sd_y9LnKoKdcGXQibly');
+      return await this.errorHandler(bh, e, 'sd_P1AwM7n0uPqyUNwU');
     }
   }
 
-  async sd_LU1PH9RfXJPrFRd2(bh, parentSpanInst) {
+  async sd_kqtW7EvUAULF7NmJ(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'sd_LU1PH9RfXJPrFRd2',
+      'sd_kqtW7EvUAULF7NmJ',
       parentSpanInst
     );
     try {
-      bh.status = 404;
-      bh.result = {
-        message: 'Nothing found',
-      };
+      let logobj: any = bh.result;
+      if (logobj instanceof Error) {
+        log.info(logobj);
+      } else {
+        log.info(safeStringify.default(logobj));
+      }
       this.tracerService.sendData(spanInst, bh);
-      await this.sd_y9LnKoKdcGXQibly(bh, parentSpanInst);
-      //appendnew_next_sd_LU1PH9RfXJPrFRd2
+      //appendnew_next_sd_kqtW7EvUAULF7NmJ
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_LU1PH9RfXJPrFRd2',
+        'sd_kqtW7EvUAULF7NmJ',
         spanInst,
-        'sd_LU1PH9RfXJPrFRd2'
+        'sd_kqtW7EvUAULF7NmJ'
       );
     }
   }
