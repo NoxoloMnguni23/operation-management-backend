@@ -4,11 +4,11 @@ let instance = null;
 //append_imports_start
 
 import * as cookieParser from 'cookie-parser'; //_splitter_
+import * as safeStringify from 'fast-safe-stringify'; //_splitter_
 import { SDBaseService } from '../services/SDBaseService'; //_splitter_
 import { TracerService } from '../services/TracerService'; //_splitter_
 import log from '../utils/Logger'; //_splitter_
 import { MongoPersistance } from '../utils/ndefault-mongodb/Mongodb/MongoPersistance'; //_splitter_
-import * as SSD_SERVICE_ID_sd_oE6JU2aiEUVDyjZH from './check_If_Exist'; //_splitter_
 //append_imports_end
 export class receipt_Data {
   private sdService = new SDBaseService();
@@ -160,7 +160,11 @@ export class receipt_Data {
         collection: 'ReceiptData',
       };
 
-      bh.input.body['Date-Uploaded'] = new Date();
+      let day = new Date().getDay();
+      let month = new Date().getMonth();
+      let year = new Date().getFullYear();
+
+      bh.input.body['Date-Uploaded'] = day + '/' + month + '/' + year;
       bh.input.body['fileid'] = bh.input.headers['fileid'];
 
       console.log();
@@ -228,6 +232,8 @@ export class receipt_Data {
       };
 
       bh.input.body['Date-Uploaded'] = new Date().toLocaleDateString();
+
+      console.log('GET');
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_iNNNA6psRGdvVtM5(bh, parentSpanInst);
       //appendnew_next_sd_oAIXs1g6MtIZlgDJ
@@ -258,6 +264,7 @@ export class receipt_Data {
       );
       this.tracerService.sendData(spanInst, bh);
       await this.sd_P1AwM7n0uPqyUNwU(bh, parentSpanInst);
+      this.sd_kqtW7EvUAULF7NmJ(bh, parentSpanInst);
       //appendnew_next_sd_iNNNA6psRGdvVtM5
       return bh;
     } catch (e) {
@@ -278,6 +285,32 @@ export class receipt_Data {
       return bh;
     } catch (e) {
       return await this.errorHandler(bh, e, 'sd_P1AwM7n0uPqyUNwU');
+    }
+  }
+
+  async sd_kqtW7EvUAULF7NmJ(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_kqtW7EvUAULF7NmJ',
+      parentSpanInst
+    );
+    try {
+      let logobj: any = bh.result;
+      if (logobj instanceof Error) {
+        log.info(logobj);
+      } else {
+        log.info(safeStringify.default(logobj));
+      }
+      this.tracerService.sendData(spanInst, bh);
+      //appendnew_next_sd_kqtW7EvUAULF7NmJ
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_kqtW7EvUAULF7NmJ',
+        spanInst,
+        'sd_kqtW7EvUAULF7NmJ'
+      );
     }
   }
 

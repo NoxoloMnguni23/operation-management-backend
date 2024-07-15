@@ -157,19 +157,18 @@
         "sequenceId": "",
         "consumes": "",
         "produces": "",
-        "filetype": "path",
+        "filetype": "memory",
         "acceptFileUpload": true,
         "useDataModel": false,
         "dataModelIsArray": false,
         "uploadFileOptions": {
-            "type": "path",
+            "type": "memory",
             "fileOptions": [
                 {
                     "name": "file",
-                    "maxCount": 1
+                    "maxCount": 20000
                 }
-            ],
-            "path": "\"file\""
+            ]
         },
         "erd": "",
         "erdName": "",
@@ -180,8 +179,8 @@
             "fileoptions": [
                 {
                     "key": "file",
-                    "value": "1",
-                    "rowId": "sd_28rYRxRpJBCDajLs",
+                    "value": "20000",
+                    "rowId": "sd_3g7uouGHgfKm39B7",
                     "valid": true
                 }
             ],
@@ -222,7 +221,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "\nbh.fileData = {\n    filePath : bh.input.files.file[0].path,\n    fileName : bh.input.files.file[0].filename,\n    collection : \"files\"\n\n}\n\nbh.file = {}\nbh.file.fileName = bh.input.files.file[0].filename\nbh.file.fileid = bh.input.headers['fileid']\n\nconsole.log('Checking receipt file: ', bh.file)\n\n",
+        "script": "\nconsole.log('file path find ', bh.input.files)\n// bh.fileData = {\n//     filePath : bh.input.files.file[0].buffer,\n//     fileName : bh.input.files.file[0].filename,\n//     collection : \"files\"\n\n// }\nbh.collection = \"files\"\nbh.path = bh.input.files.file[0].fieldname;\n\n// const newImage = new Image();\n//     newImage.name = req.file.originalname;\n//     newImage.data = req.file.buffer; // Access the buffer containing file data\n//     newImage.contentType = req.file.mimetype;\n// bh.fileData = {\n//     name : bh.input.files.file[0].originalname,\n//     data : bh.input.files.file[0].buffer,\n//     contentType:bh.input.files.file[0].mimetype,\n//     filePath : bh.input.files.file[0].fieldname,\n//     fileName : bh.input.files.file[0].originalname,\n//     collection : \"files\"\n\n// }\nbh.fileData ={\n      filename: bh.input.files.file[0].originalname,\n      contentType: bh.input.files.file[0].mimetype,\n      data: bh.input.files.file[0].buffer,\n      size: bh.input.files.file[0].size,\n      fileid: bh.input.headers['fileid']\n    }\n\nbh.file = {}\nbh.collection = \"files\";\nbh.file.fileName = bh.input.files.file[0].originalname\nbh.file.fileid = bh.input.headers['fileid']\n\nconsole.log('Checking receipt file: ', bh)\n\n",
         "functionName": "sd_6viLePdBwxvCAm7o",
         "category": "Function",
         "x": 125,
@@ -245,13 +244,12 @@
         "nodeType": "flow",
         "name": "",
         "databaseConfig": "sd_qC5Zfy7LJYHmxiFv",
-        "collection": "bh.fileData.collection",
+        "collection": "bh.collection",
         "options": "bh.options",
         "resultMapping": "bh.result",
-        "operation": "uploadFile",
+        "operation": "insertOne",
         "argumentArray": [
-            "filePath",
-            "fileName",
+            "document",
             "options"
         ],
         "aggregate": "",
@@ -268,10 +266,10 @@
         "yAxis": "",
         "indexes": "",
         "docs": "",
-        "document": "",
+        "document": "bh.fileData",
         "newName": "",
         "doc": "",
-        "filePath": "bh.fileData.filePath",
+        "filePath": "bh.path",
         "fileName": "bh.file",
         "pipeline": "",
         "functionName": "sd_aVrGcMzlRCoBrQMT",
@@ -286,7 +284,7 @@
         "__ssdTypeInputs__": {
             "collection": {
                 "type": "bh",
-                "value": "fileData.collection",
+                "value": "collection",
                 "constant": false
             },
             "options": {
@@ -306,12 +304,17 @@
             },
             "filePath": {
                 "type": "bh",
-                "value": "fileData.filePath",
+                "value": "path",
                 "constant": false
             },
             "fileName": {
                 "type": "bh",
                 "value": "file",
+                "constant": false
+            },
+            "document": {
+                "type": "bh",
+                "value": "fileData",
                 "constant": false
             }
         },
@@ -368,7 +371,6 @@
             "send": "bh.result"
         },
         "dataModelIsArray": false,
-        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "erd": "",
@@ -414,6 +416,7 @@
         "acceptFileUpload": false,
         "useDataModel": false,
         "dataModelIsArray": false,
+        "uploadFileOptions": "",
         "erd": "",
         "erdName": "",
         "entity": "",
@@ -457,7 +460,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "bh.file = {\n    collection:\"files.files\"\n}\n\nconsole.log(\"bh file\",bh.file.collection)",
+        "script": "bh.file = {\n    collection:\"files\"\n}\n\nconsole.log(\"bh file\",bh.file.collection)",
         "functionName": "sd_cBTbr7aVUJzY5qWe",
         "category": "Function",
         "x": 165,
@@ -688,7 +691,6 @@
         "acceptFileUpload": false,
         "useDataModel": false,
         "dataModelIsArray": false,
-        "uploadFileOptions": "",
         "erd": "",
         "erdName": "",
         "entity": "",
@@ -732,7 +734,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "bh.file = {\n     collection : \"files.files\",\n}",
+        "script": "bh.collection = \"files\"\n\nconsole.log(\"bh file\",bh.input.params.filename)\n// bh.input.params.collection = bh.collection;\nbh.searchObj = {\n    collection:bh.collection,\n    filter:{fileid: bh.input.params.filename}\n}\nconsole.log(\"bh\",bh)\n",
         "functionName": "sd_Z7jmrS6fMYZX0Ao3",
         "category": "Function",
         "x": 170,
@@ -775,7 +777,7 @@
                 "key": "searchObj",
                 "map": true,
                 "valueType": "bh",
-                "value": "file"
+                "value": "searchObj"
             }
         ],
         "bhVariables": [],
@@ -792,7 +794,7 @@
         "callService": "./check_If_Exist",
         "startName": "checkIfExist",
         "inputParams": [
-            "bh.file"
+            "bh.searchObj"
         ],
         "accept_bh": false,
         "functionName": "sd_qXO87wPTptbovEe0",
@@ -854,14 +856,14 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "bh.result = bh.result\nbh.filter;\nconst data = bh.result.map(_data=>{\n   return _data.filename\n})\n\n data.forEach(_query=>{\n  bh.filter = {\"filename\":_query}\n})\n\n",
+        "script": "bh.result = bh.result\nbh.filter;\nconsole.log(\"VOID\",bh)\n// const data = bh.result.map(_data=>{\n//    return _data.filename\n// })\n\n//  data.forEach(_query=>{\n//   bh.filter = {\"filename\":_query}\n// })\n\n",
         "functionName": "sd_fxmfCcXwknPq02dZ",
         "category": "Function",
         "x": 465,
         "y": 660,
         "wires": [
             [
-                "sd_X7PnVTcZRPTLWvnw"
+                "sd_xEHB5WqMypBahPEr"
             ]
         ],
         "__n_excludedFromValidation__": {},
@@ -901,7 +903,7 @@
         "headers": {},
         "responseBody": {
             "type": "bh",
-            "value": "result.downloadStream",
+            "value": "result",
             "ssd_typedInputField": true
         },
         "httpcode": {
@@ -909,14 +911,14 @@
             "value": 200,
             "ssd_typedInputField": true
         },
-        "responseType": "stream",
+        "responseType": "obj",
         "swaggerResponse": {},
         "responseMapping": {
             "status": 200,
-            "stream": "bh.result.downloadStream"
+            "obj": "bh.result",
+            "send": "bh.result"
         },
         "dataModelIsArray": false,
-        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "erd": "",
@@ -935,7 +937,7 @@
         },
         "functionName": "sd_BhdOx7QniJ42fEpo",
         "category": "HTTP",
-        "x": 690,
+        "x": 785,
         "y": 740,
         "wires": [],
         "__n_excludedFromValidation__": {},
@@ -951,16 +953,17 @@
         "nodeType": "flow",
         "name": "",
         "databaseConfig": "sd_qC5Zfy7LJYHmxiFv",
-        "collection": "\"files\"",
-        "options": "bh",
+        "collection": "bh.collection",
+        "options": "bh.options",
         "resultMapping": "bh.result",
-        "operation": "downloadFile",
+        "operation": "find",
         "argumentArray": [
-            "filter"
+            "query",
+            "options"
         ],
         "aggregate": "",
         "operations": "",
-        "query": "bh",
+        "query": "bh.filter",
         "fieldOrSpec": "",
         "filter": "bh.filter",
         "key": "",
@@ -981,21 +984,21 @@
         "functionName": "sd_X7PnVTcZRPTLWvnw",
         "category": "Storage",
         "x": 585,
-        "y": 660,
+        "y": 560,
         "wires": [
             [
-                "sd_BhdOx7QniJ42fEpo"
+                "sd_85DNNTQUhZ2JNq7A"
             ]
         ],
         "__ssdTypeInputs__": {
             "collection": {
-                "type": "str",
-                "value": "files",
+                "type": "bh",
+                "value": "collection",
                 "constant": false
             },
             "options": {
                 "type": "bh",
-                "value": "",
+                "value": "options",
                 "constant": false
             },
             "resultMapping": {
@@ -1005,7 +1008,7 @@
             },
             "query": {
                 "type": "bh",
-                "value": "",
+                "value": "filter",
                 "constant": false
             },
             "filter": {
@@ -1014,6 +1017,53 @@
                 "constant": false
             }
         },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "receipts_File"
+    },
+    {
+        "id": "sd_85DNNTQUhZ2JNq7A",
+        "type": "ServerLog",
+        "z": "SSD_SERVICE_ID_sd_E65ytoCUunRWk8wH",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 0,
+        "logObject": "bh.result.metadata",
+        "logLevel": "info",
+        "functionName": "sd_85DNNTQUhZ2JNq7A",
+        "category": "General",
+        "x": 700,
+        "y": 620,
+        "wires": [],
+        "__ssdTypeInputs__": {
+            "logObject": {
+                "type": "bh",
+                "value": "result.metadata",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "receipts_File"
+    },
+    {
+        "id": "sd_xEHB5WqMypBahPEr",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_E65ytoCUunRWk8wH",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "// bh.result.downloadStream = bh.result.metadata.filename.fileName;\n\n// console.log(\"resukt\",bh)",
+        "functionName": "sd_xEHB5WqMypBahPEr",
+        "category": "Function",
+        "x": 585,
+        "y": 680,
+        "wires": [
+            [
+                "sd_BhdOx7QniJ42fEpo"
+            ]
+        ],
         "__n_excludedFromValidation__": {},
         "generateNext": false,
         "serviceName": "receipts_File",
