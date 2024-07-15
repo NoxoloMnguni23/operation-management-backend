@@ -65,8 +65,7 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "receipts_File",
-        "functionName": "sd_kmXM5MzwfJXRZLHV",
-        "generated": false
+        "functionName": "sd_kmXM5MzwfJXRZLHV"
     },
     {
         "id": "sd_hkJSWvBTg5Elqv2I",
@@ -214,8 +213,7 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "receipts_File",
-        "functionName": "sd_H1NlNAP1RVDW5ffa",
-        "generated": false
+        "functionName": "sd_H1NlNAP1RVDW5ffa"
     },
     {
         "id": "sd_6viLePdBwxvCAm7o",
@@ -224,7 +222,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "\nbh.fileData = {\n    filePath : bh.input.files.file[0].path,\n    fileName : bh.input.files.file[0].filename,\n    collection : \"files\"\n\n}\n\n",
+        "script": "\nbh.fileData = {\n    filePath : bh.input.files.file[0].path,\n    fileName : bh.input.files.file[0].filename,\n    collection : \"files\"\n\n}\n\nbh.file = {}\nbh.file.fileName = bh.input.files.file[0].filename\nbh.file.fileid = bh.input.headers['fileid']\n\nconsole.log('Checking receipt file: ', bh.file)\n\n",
         "functionName": "sd_6viLePdBwxvCAm7o",
         "category": "Function",
         "x": 125,
@@ -274,7 +272,7 @@
         "newName": "",
         "doc": "",
         "filePath": "bh.fileData.filePath",
-        "fileName": "bh.fileData.fileName",
+        "fileName": "bh.file",
         "pipeline": "",
         "functionName": "sd_aVrGcMzlRCoBrQMT",
         "category": "Storage",
@@ -313,7 +311,7 @@
             },
             "fileName": {
                 "type": "bh",
-                "value": "fileData.fileName",
+                "value": "file",
                 "constant": false
             }
         },
@@ -450,8 +448,7 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "receipts_File",
-        "functionName": "sd_vaFoJyYT3urKm5So",
-        "generated": false
+        "functionName": "sd_vaFoJyYT3urKm5So"
     },
     {
         "id": "sd_cBTbr7aVUJzY5qWe",
@@ -533,9 +530,9 @@
             ]
         ],
         "__n_excludedFromValidation__": {},
-        "generated": true,
         "generateNext": false,
-        "serviceName": "receipts_File"
+        "serviceName": "receipts_File",
+        "generated": true
     },
     {
         "id": "sd_DfjyowIB4RNeWxUM",
@@ -726,8 +723,7 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "receipts_File",
-        "functionName": "sd_xGggKm2GLzc3xfeL",
-        "generated": false
+        "functionName": "sd_xGggKm2GLzc3xfeL"
     },
     {
         "id": "sd_Z7jmrS6fMYZX0Ao3",
@@ -809,9 +805,9 @@
             ]
         ],
         "__n_excludedFromValidation__": {},
-        "generated": true,
         "generateNext": false,
-        "serviceName": "receipts_File"
+        "serviceName": "receipts_File",
+        "generated": true
     },
     {
         "id": "sd_EtB577Gksc1vG2rL",

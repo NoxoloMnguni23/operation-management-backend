@@ -1,6 +1,7 @@
 {
-    "/add-budget": {
-        "post": {
+    "/add-budget": {},
+    "/get-budget": {
+        "get": {
             "summary": "",
             "description": "",
             "consumes": [],
@@ -12,7 +13,7 @@
             ]
         }
     },
-    "/get-budget/:dateUpload": {
+    "/get-budget/:year": {
         "get": {
             "summary": "",
             "description": "",

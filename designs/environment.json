@@ -32,7 +32,7 @@
             "webAppMountpoint": "web",
             "CLOCK_TOLERANCE": "5",
             "NGFORAGE_MOBILE_DRIVER": "INDEXED_DB",
-            "mongodbUrl": "mongodb://localhost:27017/OCR"
+            "mongodbUrl": "mongodb://0.0.0.0:27017/receipt"
         }
     },
     "prod": {
@@ -50,7 +50,7 @@
             "webAppMountpoint": "web",
             "CLOCK_TOLERANCE": "5",
             "NGFORAGE_MOBILE_DRIVER": "INDEXED_DB",
-            "mongodbUrl": "mongodb://localhost:27017/OCR"
+            "mongodbUrl": "mongodb://0.0.0.0:27017/receipt"
         }
     }
 }
