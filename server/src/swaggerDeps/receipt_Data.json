@@ -12,7 +12,7 @@
             ]
         }
     },
-    "/get-receipt": {
+    "/get-receipt-data": {
         "get": {
             "summary": "",
             "description": "",

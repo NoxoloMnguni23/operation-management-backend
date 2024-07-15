@@ -290,14 +290,14 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "bh.search = {\n    collection: 'budget',\n    query: bh.year\n}",
+        "script": "bh.search = {\n    collection: 'budget',\n}",
         "functionName": "sd_EUCHhxbQxcRHSqzU",
         "category": "Function",
-        "x": 185,
+        "x": 165,
         "y": 440,
         "wires": [
             [
-                "sd_etWvFXyKMezM65wW"
+                "sd_0KMj85zQVdsCqOn3"
             ]
         ],
         "__n_excludedFromValidation__": {},
@@ -312,9 +312,9 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "property": "result",
+        "property": "budget",
         "propertyType": "bh",
-        "propertyGv": "bh.result",
+        "propertyGv": "bh.budget",
         "rules": [
             {
                 "t": "nempty"
@@ -350,7 +350,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "bh.status = 404;\n\n",
+        "script": "console.log( 'Budget not found:  ', bh.budget)\n\n\nbh.status = 404;\n\nbh.res = {Error: 'Budget for that year not found'}\n",
         "functionName": "sd_kBWSWcAVTOkRN6yw",
         "category": "Function",
         "x": 505,
@@ -372,7 +372,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "\nbh.result = bh.result;\n\nbh.query = bh.input.params\nconsole.log(\"params\", bh.query)\n\nbh.data = bh.result.map(_data =>{\n    return _data.dateUpload\n})\n\nbh.data.forEach((item,i)=>{\n   if(item == bh.query.dateUpload)\n   {\n       console.log(\"Found\", bh.result[i])\n       bh.result = bh.result[i]\n       bh.status = 200;\n\n   }\n   else{\n       console.log(\"this months budget is not found\")\n       bh.status = 404;\n\n   }\n})",
+        "script": "console.log( 'Budget:  ', bh.budget)\n\nbh.res = bh.budget\n\nbh.status = 200\n\nconsole.log('Res: ', bh.res)",
         "functionName": "sd_ccai8j555bqv4Nr3",
         "category": "Function",
         "x": 505,
@@ -397,7 +397,7 @@
         "headers": {},
         "responseBody": {
             "type": "bh",
-            "value": "result",
+            "value": "res",
             "ssd_typedInputField": true
         },
         "httpcode": {
@@ -409,11 +409,10 @@
         "swaggerResponse": {},
         "responseMapping": {
             "status": "bh.status",
-            "obj": "bh.result",
-            "send": "bh.result"
+            "obj": "bh.res",
+            "send": "bh.res"
         },
         "dataModelIsArray": false,
-        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "erd": "",
@@ -723,68 +722,6 @@
         "generated": true
     },
     {
-        "id": "sd_etWvFXyKMezM65wW",
-        "type": "CallService",
-        "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "",
-        "outputs": 1,
-        "isValidNode": true,
-        "noerr": 0,
-        "service": {
-            "id": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
-            "type": "tab",
-            "createdDate": "2024-06-25T10:19:16.073Z",
-            "label": "budget",
-            "disabled": false,
-            "info": "",
-            "functionSeq": 0
-        },
-        "flow": {
-            "flowId": "sd_0U7zVI5Pup5AaE4F",
-            "flowName": "checkIfExist"
-        },
-        "inputVariables": [
-            {
-                "key": "searchObj",
-                "map": true,
-                "valueType": "bh",
-                "value": "search"
-            }
-        ],
-        "bhVariables": [],
-        "outputMapping": [
-            {
-                "mapVarType": "local",
-                "key": "result",
-                "valueType": "bh",
-                "value": "budget",
-                "mapVarName": "result",
-                "localVar": "bh.budget"
-            }
-        ],
-        "callService": "./budget",
-        "startName": "checkIfExist",
-        "inputParams": [
-            "bh.search"
-        ],
-        "accept_bh": false,
-        "functionName": "sd_etWvFXyKMezM65wW",
-        "category": "General",
-        "x": 285,
-        "y": 440,
-        "wires": [
-            [
-                "sd_Os2S07eALISUhqc3"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "budget",
-        "generated": true
-    },
-    {
         "id": "sd_jOQkNE2rKbA32hfR",
         "type": "HttpIn",
         "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
@@ -906,7 +843,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "console.log(bh.budget)\n\n\nbh.status = 404;\n\nbh.res = {Error: 'Budget for that year not found'}\n",
+        "script": "console.log( 'Budget not found:  ', bh.budget)\n\n\nbh.status = 404;\n\nbh.res = {Error: 'Budget for that year not found'}\n",
         "functionName": "sd_KvMUeT4uxDbofofY",
         "category": "Function",
         "x": 565,
@@ -928,7 +865,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "console.log(bh.budget)\n\nbh.res = bh.budget\n\nbh.status = 200",
+        "script": "console.log( 'Budget:  ', bh.budget)\n\nbh.res = bh.budget\n\nbh.status = 200",
         "functionName": "sd_71rjOlZeJfEC4EOD",
         "category": "Function",
         "x": 565,
@@ -1052,6 +989,78 @@
                 "sd_NoQvo7sDprGTDpBV"
             ]
         ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "budget",
+        "generated": true
+    },
+    {
+        "id": "sd_0KMj85zQVdsCqOn3",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "databaseConfig": "sd_qC5Zfy7LJYHmxiFv",
+        "collection": "bh.search.collection",
+        "options": "bh.option",
+        "resultMapping": "bh.budget",
+        "operation": "find",
+        "argumentArray": [
+            "query",
+            "options"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh.query",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "sd_0KMj85zQVdsCqOn3",
+        "category": "Storage",
+        "x": 260,
+        "y": 440,
+        "wires": [
+            [
+                "sd_Os2S07eALISUhqc3"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "bh",
+                "value": "search.collection",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "option",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh",
+                "value": "budget",
+                "constant": false
+            },
+            "query": {
+                "type": "bh",
+                "value": "query",
+                "constant": false
+            }
+        },
         "__n_excludedFromValidation__": {},
         "generateNext": false,
         "serviceName": "budget",

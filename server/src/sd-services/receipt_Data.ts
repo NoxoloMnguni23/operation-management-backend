@@ -113,7 +113,7 @@ export class receipt_Data {
     );
 
     this.app['get'](
-      `${this.serviceBasePath}/get-receipt`,
+      `${this.serviceBasePath}/get-receipt-data`,
       cookieParser(),
       this.sdService.getMiddlesWaresBySequenceId(
         null,
@@ -160,7 +160,9 @@ export class receipt_Data {
       };
 
       bh.input.body['Date-Uploaded'] = new Date();
+      bh.input.body['fileid'] = bh.input.headers['fileid'];
 
+      console.log();
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_lMVmdpYxUo2oWmbL(bh, parentSpanInst);
       //appendnew_next_sd_4tGwLR1woumnEG5V
