@@ -267,6 +267,12 @@ export class receipts_File {
         collection: 'files',
       };
 
+      bh.file = {};
+      bh.file.fileName = bh.input.files.file[0].filename;
+      bh.file.fileid = bh.input.headers['fileid'];
+
+      console.log('Checking receipt file: ', bh.file);
+
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_aVrGcMzlRCoBrQMT(bh, parentSpanInst);
       //appendnew_next_sd_6viLePdBwxvCAm7o
@@ -292,7 +298,7 @@ export class receipts_File {
         'sd_qC5Zfy7LJYHmxiFv',
         bh.fileData.collection,
         bh.fileData.filePath,
-        bh.fileData.fileName,
+        bh.file,
         bh.options,
         bh.options
       );

@@ -22,7 +22,7 @@
         "uploadpath": "",
         "summary": "",
         "description": "",
-        "method": "post",
+        "method": "put",
         "sequenceId": "",
         "consumes": "",
         "produces": "",
@@ -46,7 +46,7 @@
         "validateRequestUsingSwaggerDocs": false,
         "category": "HTTP",
         "x": 65,
-        "y": 80,
+        "y": 240,
         "wires": [
             [
                 "sd_IDFAuaOfSGXRv0ai"
@@ -64,8 +64,7 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "budget",
-        "functionName": "sd_gF08MNw4SN5zBKyt",
-        "generated": false
+        "functionName": "sd_gF08MNw4SN5zBKyt"
     },
     {
         "id": "sd_IDFAuaOfSGXRv0ai",
@@ -74,14 +73,14 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "    bh.budget = {\n    collection: 'budget',\n}\n\n\nbh.input.body['dateUpload'] = new Date().getFullYear()+'-' + new Date().getMonth()\n",
+        "script": "bh.year = {year: new Date().getUTCFullYear() }\n\nbh.search = {\n    collection: 'budget',\n    query: bh.year\n}\n\nlet months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']\n\nbh.input.body['dateAdded'] = new Date().toLocaleDateString()\n\n\n",
         "functionName": "sd_IDFAuaOfSGXRv0ai",
         "category": "Function",
-        "x": 225,
-        "y": 80,
+        "x": 165,
+        "y": 240,
         "wires": [
             [
-                "sd_31P6ZRVW156Fil4N"
+                "sd_gAvb9kHRPreXVK7b"
             ]
         ],
         "__n_excludedFromValidation__": {},
@@ -97,24 +96,25 @@
         "nodeType": "flow",
         "name": "",
         "databaseConfig": "sd_qC5Zfy7LJYHmxiFv",
-        "collection": "bh.budget.collection",
+        "collection": "bh.search.collection",
         "options": "bh.option",
         "resultMapping": "bh.result",
-        "operation": "insertOne",
+        "operation": "findOneAndUpdate",
         "argumentArray": [
-            "document",
+            "filter",
+            "update",
             "options"
         ],
         "aggregate": "",
         "operations": "",
         "query": "bh",
         "fieldOrSpec": "",
-        "filter": "",
+        "filter": "bh.search.query",
         "key": "",
         "docId": "",
         "indexName": "",
         "replacement": "",
-        "update": "",
+        "update": "bh.res",
         "xAxis": "",
         "yAxis": "",
         "indexes": "",
@@ -127,8 +127,8 @@
         "pipeline": "",
         "functionName": "sd_31P6ZRVW156Fil4N",
         "category": "Storage",
-        "x": 365,
-        "y": 80,
+        "x": 625,
+        "y": 220,
         "wires": [
             [
                 "sd_5U6YzdfhWcmIzoN4"
@@ -137,7 +137,7 @@
         "__ssdTypeInputs__": {
             "collection": {
                 "type": "bh",
-                "value": "budget.collection",
+                "value": "search.collection",
                 "constant": false
             },
             "options": {
@@ -158,6 +158,16 @@
             "document": {
                 "type": "bh",
                 "value": "input.body",
+                "constant": false
+            },
+            "filter": {
+                "type": "bh",
+                "value": "search.query",
+                "constant": false
+            },
+            "update": {
+                "type": "bh",
+                "value": "res",
                 "constant": false
             }
         },
@@ -192,7 +202,6 @@
             "send": "bh.result"
         },
         "dataModelIsArray": false,
-        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "erd": "",
@@ -211,8 +220,8 @@
         },
         "functionName": "sd_5U6YzdfhWcmIzoN4",
         "category": "HTTP",
-        "x": 525,
-        "y": 80,
+        "x": 785,
+        "y": 220,
         "wires": [],
         "__n_excludedFromValidation__": {},
         "generateNext": false,
@@ -226,7 +235,7 @@
         "viewType": "server",
         "nodeType": "start",
         "name": "get-budget",
-        "path": "/get-budget/:dateUpload",
+        "path": "/get-budget",
         "uploadpath": "",
         "summary": "",
         "description": "",
@@ -238,7 +247,6 @@
         "acceptFileUpload": false,
         "useDataModel": false,
         "dataModelIsArray": false,
-        "uploadFileOptions": "",
         "erd": "",
         "erdName": "",
         "entity": "",
@@ -255,7 +263,7 @@
         "validateRequestUsingSwaggerDocs": false,
         "category": "HTTP",
         "x": 65,
-        "y": 240,
+        "y": 440,
         "wires": [
             [
                 "sd_EUCHhxbQxcRHSqzU"
@@ -273,8 +281,7 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "budget",
-        "functionName": "sd_fo6SnfxXCvjHOBfU",
-        "generated": false
+        "functionName": "sd_fo6SnfxXCvjHOBfU"
     },
     {
         "id": "sd_EUCHhxbQxcRHSqzU",
@@ -283,14 +290,14 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "bh.search = {\n    collection: 'budget'\n}",
+        "script": "bh.search = {\n    collection: 'budget',\n}",
         "functionName": "sd_EUCHhxbQxcRHSqzU",
         "category": "Function",
         "x": 165,
-        "y": 240,
+        "y": 440,
         "wires": [
             [
-                "sd_XBaowDKCqcqEsiaW"
+                "sd_0KMj85zQVdsCqOn3"
             ]
         ],
         "__n_excludedFromValidation__": {},
@@ -299,77 +306,15 @@
         "generated": true
     },
     {
-        "id": "sd_XBaowDKCqcqEsiaW",
-        "type": "CallService",
-        "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "",
-        "outputs": 1,
-        "isValidNode": true,
-        "noerr": 0,
-        "service": {
-            "id": "SSD_SERVICE_ID_sd_oE6JU2aiEUVDyjZH",
-            "type": "tab",
-            "createdDate": "2024-06-25T10:13:43.508Z",
-            "label": "check_If_Exist",
-            "disabled": false,
-            "info": "",
-            "functionSeq": 0
-        },
-        "flow": {
-            "flowId": "sd_F9CrOrETPPnaRNnz",
-            "flowName": "checkIfExist"
-        },
-        "inputVariables": [
-            {
-                "key": "searchObj",
-                "map": true,
-                "valueType": "bh",
-                "value": "search"
-            }
-        ],
-        "bhVariables": [],
-        "outputMapping": [
-            {
-                "mapVarType": "local",
-                "key": "result",
-                "valueType": "bh",
-                "value": "result",
-                "mapVarName": "result",
-                "localVar": "bh.result"
-            }
-        ],
-        "callService": "./check_If_Exist",
-        "startName": "checkIfExist",
-        "inputParams": [
-            "bh.search"
-        ],
-        "accept_bh": false,
-        "functionName": "sd_XBaowDKCqcqEsiaW",
-        "category": "General",
-        "x": 285,
-        "y": 240,
-        "wires": [
-            [
-                "sd_Os2S07eALISUhqc3"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generated": true,
-        "generateNext": false,
-        "serviceName": "budget"
-    },
-    {
         "id": "sd_Os2S07eALISUhqc3",
         "type": "Switch",
         "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "property": "result",
+        "property": "budget",
         "propertyType": "bh",
-        "propertyGv": "bh.result",
+        "propertyGv": "bh.budget",
         "rules": [
             {
                 "t": "nempty"
@@ -383,8 +328,8 @@
         "outputs": 2,
         "functionName": "sd_Os2S07eALISUhqc3",
         "category": "Function",
-        "x": 405,
-        "y": 240,
+        "x": 365,
+        "y": 440,
         "wires": [
             [
                 "sd_ccai8j555bqv4Nr3"
@@ -405,11 +350,11 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "bh.status = 404;\n\n",
+        "script": "console.log( 'Budget not found:  ', bh.budget)\n\n\nbh.status = 404;\n\nbh.res = {Error: 'Budget for that year not found'}\n",
         "functionName": "sd_kBWSWcAVTOkRN6yw",
         "category": "Function",
         "x": 505,
-        "y": 280,
+        "y": 480,
         "wires": [
             [
                 "sd_EuNVuAaWrSkB4SyX"
@@ -427,11 +372,11 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "\nbh.result = bh.result;\n\nbh.query = bh.input.params\nconsole.log(\"params\", bh.query)\n\nbh.data = bh.result.map(_data =>{\n    return _data.dateUpload\n})\n\nbh.data.forEach((item,i)=>{\n   if(item == bh.query.dateUpload)\n   {\n       console.log(\"Found\", bh.result[i])\n       bh.result = bh.result[i]\n       bh.status = 200;\n\n   }\n   else{\n       console.log(\"this months budget is not found\")\n       bh.status = 404;\n\n   }\n})",
+        "script": "console.log( 'Budget:  ', bh.budget)\n\nbh.res = bh.budget\n\nbh.status = 200\n\nconsole.log('Res: ', bh.res)",
         "functionName": "sd_ccai8j555bqv4Nr3",
         "category": "Function",
         "x": 505,
-        "y": 200,
+        "y": 380,
         "wires": [
             [
                 "sd_EuNVuAaWrSkB4SyX"
@@ -452,7 +397,7 @@
         "headers": {},
         "responseBody": {
             "type": "bh",
-            "value": "result",
+            "value": "res",
             "ssd_typedInputField": true
         },
         "httpcode": {
@@ -464,11 +409,10 @@
         "swaggerResponse": {},
         "responseMapping": {
             "status": "bh.status",
-            "obj": "bh.result",
-            "send": "bh.result"
+            "obj": "bh.res",
+            "send": "bh.res"
         },
         "dataModelIsArray": false,
-        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "erd": "",
@@ -487,9 +431,636 @@
         },
         "functionName": "sd_EuNVuAaWrSkB4SyX",
         "category": "HTTP",
-        "x": 645,
-        "y": 240,
+        "x": 665,
+        "y": 420,
         "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "budget",
+        "generated": true
+    },
+    {
+        "id": "sd_0U7zVI5Pup5AaE4F",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "check if exist",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "searchObj",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "result",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "checkIfExist",
+        "category": "General",
+        "x": 65,
+        "y": 40,
+        "wires": [
+            [
+                "sd_olF3s2y3zm43hvEn"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "budget"
+    },
+    {
+        "id": "sd_olF3s2y3zm43hvEn",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "databaseConfig": "sd_qC5Zfy7LJYHmxiFv",
+        "collection": "bh.input.searchObj.collection",
+        "options": "bh.option",
+        "resultMapping": "bh.local.result",
+        "operation": "find",
+        "argumentArray": [
+            "query",
+            "options"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh.input.searchObj.query",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "sd_olF3s2y3zm43hvEn",
+        "category": "Storage",
+        "x": 205,
+        "y": 40,
+        "wires": [
+            []
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "bh.input",
+                "value": "searchObj.collection",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "option",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "result",
+                "constant": false
+            },
+            "query": {
+                "type": "bh.input",
+                "value": "searchObj.query",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "budget",
+        "generated": true
+    },
+    {
+        "id": "sd_ItRLVRrvOGXeK1nt",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "\nlet months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']\n\nbh.input.body['dateAdded'] = new Date().toLocaleDateString()\n\nbh.year = {year: new Date().getUTCFullYear() }\nlet year = bh.year\nconsole.log('Year: ', bh.year)\n\nbh.data ={\n            dateUpload: new Date().toLocaleDateString(),\n            month: months[bh.input.body.month],\n            amount: bh.input.body.amount\n        }\n\nconsole.log('Found budget: ', bh.budget)\n\nbh.budget = bh.budget[0]\n\nconsole.log('After Update 1: ', bh.budget)\n\nbh.budget.budget.push(bh.data)\n\nconsole.log('After Update 2: ', bh.budget)\n\nbh.res = bh.budget\n\n\nbh.code = 201\n\nbh.option = {\n    upsert: true\n}\n\nbh.res = {$set: bh.budget\n}\n\nconsole.log('Else')\nconsole.log(bh.data)",
+        "functionName": "sd_ItRLVRrvOGXeK1nt",
+        "category": "Function",
+        "x": 485,
+        "y": 300,
+        "wires": [
+            [
+                "sd_31P6ZRVW156Fil4N"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "budget",
+        "generated": true
+    },
+    {
+        "id": "sd_gAvb9kHRPreXVK7b",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
+            "type": "tab",
+            "createdDate": "2024-06-25T10:19:16.073Z",
+            "label": "budget",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_0U7zVI5Pup5AaE4F",
+            "flowName": "checkIfExist"
+        },
+        "inputVariables": [
+            {
+                "key": "searchObj",
+                "map": true,
+                "valueType": "bh",
+                "value": "search"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "result",
+                "valueType": "bh",
+                "value": "budget",
+                "mapVarName": "result",
+                "localVar": "bh.budget"
+            }
+        ],
+        "callService": "./budget",
+        "startName": "checkIfExist",
+        "inputParams": [
+            "bh.search"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_gAvb9kHRPreXVK7b",
+        "category": "General",
+        "x": 285,
+        "y": 240,
+        "wires": [
+            [
+                "sd_3zsEbBRFNmFa8Xn0"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "budget",
+        "generated": true
+    },
+    {
+        "id": "sd_GSFBlk2W1h9NDotp",
+        "type": "ServerLog",
+        "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 0,
+        "logObject": "bh.budget",
+        "logLevel": "info",
+        "functionName": "sd_GSFBlk2W1h9NDotp",
+        "category": "General",
+        "x": 345,
+        "y": 60,
+        "wires": [],
+        "__ssdTypeInputs__": {
+            "logObject": {
+                "type": "bh",
+                "value": "budget",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "budget"
+    },
+    {
+        "id": "sd_8TigI68lJ1j9fswG",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "\nlet months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']\n\nbh.input.body['dateAdded'] = new Date().toLocaleDateString()\n\nlet currentMonth = months[bh.input.body.month] + ' - ' + new Date().getUTCFullYear()\nconsole.log('Body: ', bh.input.body)\nconsole.log('Months: ', currentMonth)\n\nbh.year = {year: new Date().getUTCFullYear() }\nlet year = bh.year\nconsole.log('Year: ', bh.year)\n\nbh.data =\n    [{\n        dateUpload: new Date().toLocaleDateString(),\n        month: months[bh.input.body.month],\n        amount: bh.input.body.amount\n        }\n    ]\n\nlet objData = {}\n\nobjData.year = new Date().getFullYear()\nobjData.budget = bh.data\nconsole.log( 'Budget data: ', objData)\n\nbh.res = {$set: objData\n}\n\n\nbh.option = {\n    upsert: true\n}\n\nbh.code = 201\n\nconsole.log('Budget: ', bh.budget)",
+        "functionName": "sd_8TigI68lJ1j9fswG",
+        "category": "Function",
+        "x": 485,
+        "y": 160,
+        "wires": [
+            [
+                "sd_31P6ZRVW156Fil4N"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "budget",
+        "generated": true
+    },
+    {
+        "id": "sd_3zsEbBRFNmFa8Xn0",
+        "type": "Switch",
+        "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "property": "budget",
+        "propertyType": "bh",
+        "propertyGv": "bh.budget",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_3zsEbBRFNmFa8Xn0",
+        "category": "Function",
+        "x": 385,
+        "y": 240,
+        "wires": [
+            [
+                "sd_8TigI68lJ1j9fswG"
+            ],
+            [
+                "sd_ItRLVRrvOGXeK1nt"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "budget",
+        "generated": true
+    },
+    {
+        "id": "sd_jOQkNE2rKbA32hfR",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "get-budgetByYear",
+        "path": "/get-budget/:year",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 65,
+        "y": 640,
+        "wires": [
+            [
+                "sd_5p3uY1F7nfLItdpH"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "budget",
+        "functionName": "sd_jOQkNE2rKbA32hfR"
+    },
+    {
+        "id": "sd_5p3uY1F7nfLItdpH",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.search = {\n    collection: 'budget',\n    query: { year: Number(bh.input.params.year) }\n}\n\nconsole.log(bh.input)\nconsole.log(bh.search)",
+        "functionName": "sd_5p3uY1F7nfLItdpH",
+        "category": "Function",
+        "x": 185,
+        "y": 640,
+        "wires": [
+            [
+                "sd_lwXJYxyayJlDLP6I"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "budget",
+        "generated": true
+    },
+    {
+        "id": "sd_NoQvo7sDprGTDpBV",
+        "type": "Switch",
+        "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "property": "budget",
+        "propertyType": "bh",
+        "propertyGv": "bh.budget",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_NoQvo7sDprGTDpBV",
+        "category": "Function",
+        "x": 425,
+        "y": 640,
+        "wires": [
+            [
+                "sd_71rjOlZeJfEC4EOD"
+            ],
+            [
+                "sd_KvMUeT4uxDbofofY"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "budget",
+        "generated": true
+    },
+    {
+        "id": "sd_KvMUeT4uxDbofofY",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log( 'Budget not found:  ', bh.budget)\n\n\nbh.status = 404;\n\nbh.res = {Error: 'Budget for that year not found'}\n",
+        "functionName": "sd_KvMUeT4uxDbofofY",
+        "category": "Function",
+        "x": 565,
+        "y": 680,
+        "wires": [
+            [
+                "sd_HKOMEhyBgl2QVB9W"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "budget",
+        "generated": true
+    },
+    {
+        "id": "sd_71rjOlZeJfEC4EOD",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log( 'Budget:  ', bh.budget)\n\nbh.res = bh.budget\n\nbh.status = 200",
+        "functionName": "sd_71rjOlZeJfEC4EOD",
+        "category": "Function",
+        "x": 565,
+        "y": 580,
+        "wires": [
+            [
+                "sd_HKOMEhyBgl2QVB9W"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "budget",
+        "generated": true
+    },
+    {
+        "id": "sd_HKOMEhyBgl2QVB9W",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh",
+            "value": "res",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh",
+            "value": "status",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.status",
+            "obj": "bh.res",
+            "send": "bh.res"
+        },
+        "dataModelIsArray": false,
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_HKOMEhyBgl2QVB9W",
+        "category": "HTTP",
+        "x": 705,
+        "y": 620,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "budget",
+        "generated": true
+    },
+    {
+        "id": "sd_lwXJYxyayJlDLP6I",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
+            "type": "tab",
+            "createdDate": "2024-06-25T10:19:16.073Z",
+            "label": "budget",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_0U7zVI5Pup5AaE4F",
+            "flowName": "checkIfExist"
+        },
+        "inputVariables": [
+            {
+                "key": "searchObj",
+                "map": true,
+                "valueType": "bh",
+                "value": "search"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "result",
+                "valueType": "bh",
+                "value": "budget",
+                "mapVarName": "result",
+                "localVar": "bh.budget"
+            }
+        ],
+        "callService": "./budget",
+        "startName": "checkIfExist",
+        "inputParams": [
+            "bh.search"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_lwXJYxyayJlDLP6I",
+        "category": "General",
+        "x": 285,
+        "y": 640,
+        "wires": [
+            [
+                "sd_NoQvo7sDprGTDpBV"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "budget",
+        "generated": true
+    },
+    {
+        "id": "sd_0KMj85zQVdsCqOn3",
+        "type": "Mongodb",
+        "z": "SSD_SERVICE_ID_sd_tEm8jG2z3d5tL0sa",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "databaseConfig": "sd_qC5Zfy7LJYHmxiFv",
+        "collection": "bh.search.collection",
+        "options": "bh.option",
+        "resultMapping": "bh.budget",
+        "operation": "find",
+        "argumentArray": [
+            "query",
+            "options"
+        ],
+        "aggregate": "",
+        "operations": "",
+        "query": "bh.query",
+        "fieldOrSpec": "",
+        "filter": "",
+        "key": "",
+        "docId": "",
+        "indexName": "",
+        "replacement": "",
+        "update": "",
+        "xAxis": "",
+        "yAxis": "",
+        "indexes": "",
+        "docs": "",
+        "document": "",
+        "newName": "",
+        "doc": "",
+        "filePath": "",
+        "fileName": "",
+        "pipeline": "",
+        "functionName": "sd_0KMj85zQVdsCqOn3",
+        "category": "Storage",
+        "x": 260,
+        "y": 440,
+        "wires": [
+            [
+                "sd_Os2S07eALISUhqc3"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "collection": {
+                "type": "bh",
+                "value": "search.collection",
+                "constant": false
+            },
+            "options": {
+                "type": "bh",
+                "value": "option",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh",
+                "value": "budget",
+                "constant": false
+            },
+            "query": {
+                "type": "bh",
+                "value": "query",
+                "constant": false
+            }
+        },
         "__n_excludedFromValidation__": {},
         "generateNext": false,
         "serviceName": "budget",
