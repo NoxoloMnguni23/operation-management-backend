@@ -133,7 +133,7 @@ export class receipt_Data {
             next
           );
           let parentSpanInst = null;
-          bh = await this.sd_fyuH8bSVxuO0uo7j(bh, parentSpanInst);
+          bh = await this.sd_oAIXs1g6MtIZlgDJ(bh, parentSpanInst);
           //appendnew_next_sd_LITkUuuJlYXmnDvY
         } catch (e) {
           return await this.errorHandler(bh, e, 'sd_LITkUuuJlYXmnDvY');
@@ -168,7 +168,6 @@ export class receipt_Data {
       bh.input.body['Date-Uploaded'] = day + '/' + month + '/' + year;
       bh.input.body['fileid'] = bh.input.headers['fileid'];
 
-      console.log();
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_lMVmdpYxUo2oWmbL(bh, parentSpanInst);
       //appendnew_next_sd_4tGwLR1woumnEG5V
@@ -222,12 +221,16 @@ export class receipt_Data {
     }
   }
 
-  async sd_fyuH8bSVxuO0uo7j(bh, parentSpanInst) {
+  async sd_oAIXs1g6MtIZlgDJ(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'sd_fyuH8bSVxuO0uo7j',
+      'sd_oAIXs1g6MtIZlgDJ',
       parentSpanInst
     );
     try {
+      bh.receiptData = {
+        collection: 'ReceiptData',
+      };
+
       bh.search = {
         collection: 'ReceiptData',
       };
@@ -236,7 +239,38 @@ export class receipt_Data {
 
       console.log('GET');
       this.tracerService.sendData(spanInst, bh);
+      bh = await this.sd_TXoyfmFyhkKfpxNX(bh, parentSpanInst);
+      //appendnew_next_sd_oAIXs1g6MtIZlgDJ
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_fyuH8bSVxuO0uo7j',
+        spanInst,
+        'sd_oAIXs1g6MtIZlgDJ'
+      );
+    }
+  }
+
+  async sd_TXoyfmFyhkKfpxNX(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_TXoyfmFyhkKfpxNX',
+      parentSpanInst
+    );
+    try {
+      const SSD_SERVICE_ID_sd_oE6JU2aiEUVDyjZHInstance: SSD_SERVICE_ID_sd_oE6JU2aiEUVDyjZH.check_If_Exist =
+        SSD_SERVICE_ID_sd_oE6JU2aiEUVDyjZH.check_If_Exist.getInstance();
+      let outputVariables =
+        await SSD_SERVICE_ID_sd_oE6JU2aiEUVDyjZHInstance.checkIfExist(
+          spanInst,
+          bh.search
+        );
+      bh.result = outputVariables.local.result;
+
+      this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_U7pG547mdq0aUxFN(bh, parentSpanInst);
+      this.sd_kqtW7EvUAULF7NmJ(bh, parentSpanInst);
       //appendnew_next_sd_TXoyfmFyhkKfpxNX
       return bh;
     } catch (e) {
@@ -266,7 +300,7 @@ export class receipt_Data {
       ) {
         bh = await this.sd_8j6lVUel7NUEAqev(bh, parentSpanInst);
       } else {
-        bh = await this.sd_LU1PH9RfXJPrFRd2(bh, parentSpanInst);
+        bh = await this.sd_y3iXMrVmRWzVftQE(bh, parentSpanInst);
       }
       this.tracerService.sendData(spanInst, bh);
 
@@ -291,9 +325,8 @@ export class receipt_Data {
       console.log('bh', bh);
       bh.status = 200;
       this.tracerService.sendData(spanInst, bh);
-      await this.sd_P1AwM7n0uPqyUNwU(bh, parentSpanInst);
-      this.sd_kqtW7EvUAULF7NmJ(bh, parentSpanInst);
-      //appendnew_next_sd_iNNNA6psRGdvVtM5
+      await this.sd_y9LnKoKdcGXQibly(bh, parentSpanInst);
+      //appendnew_next_sd_8j6lVUel7NUEAqev
       return bh;
     } catch (e) {
       return await this.errorHandler(
@@ -312,7 +345,32 @@ export class receipt_Data {
 
       return bh;
     } catch (e) {
-      return await this.errorHandler(bh, e, 'sd_P1AwM7n0uPqyUNwU');
+      return await this.errorHandler(bh, e, 'sd_y9LnKoKdcGXQibly');
+    }
+  }
+
+  async sd_y3iXMrVmRWzVftQE(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_y3iXMrVmRWzVftQE',
+      parentSpanInst
+    );
+    try {
+      bh.status = 404;
+      bh.result = {
+        message: 'Nothing found',
+      };
+      this.tracerService.sendData(spanInst, bh);
+      await this.sd_y9LnKoKdcGXQibly(bh, parentSpanInst);
+      //appendnew_next_sd_y3iXMrVmRWzVftQE
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_y3iXMrVmRWzVftQE',
+        spanInst,
+        'sd_y3iXMrVmRWzVftQE'
+      );
     }
   }
 

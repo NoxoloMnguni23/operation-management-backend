@@ -74,7 +74,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "bh.receiptData = {\n    collection : \"ReceiptData\",\n}\n\n\n\nlet day = new Date().getDay() \nlet month = new Date().getMonth()\nlet year = new Date().getFullYear()\n\n\n\n\n\nbh.input.body['Date-Uploaded'] = day + '/' + month + '/' + year;\nbh.input.body['fileid'] = bh.input.headers['fileid'] \n\n\nconsole.log()",
+        "script": "bh.receiptData = {\n    collection : \"ReceiptData\",\n}\n\n\n\nlet day = new Date().getDay() \nlet month = new Date().getMonth()\nlet year = new Date().getFullYear()\n\n\n\n\n\nbh.input.body['Date-Uploaded'] = day + '/' + month + '/' + year;\nbh.input.body['fileid'] = bh.input.headers['fileid'] \n",
         "functionName": "sd_4tGwLR1woumnEG5V",
         "category": "Function",
         "x": 225,
@@ -282,7 +282,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "bh.receiptData = {\n    collection : \"ReceiptData\",\n}\n\nbh.input.body['Date-Uploaded'] = new Date().toLocaleDateString()\n\nconsole.log('GET')",
+        "script": "bh.receiptData = {\n    collection : \"ReceiptData\",\n}\n\nbh.search = {\n    collection : \"ReceiptData\",\n}\n\nbh.input.body['Date-Uploaded'] = new Date().toLocaleDateString()\n\nconsole.log('GET')",
         "functionName": "sd_oAIXs1g6MtIZlgDJ",
         "category": "Function",
         "x": 245,
@@ -390,7 +390,7 @@
                 "sd_8j6lVUel7NUEAqev"
             ],
             [
-                "sd_LU1PH9RfXJPrFRd2"
+                "sd_y3iXMrVmRWzVftQE"
             ]
         ],
         "__n_excludedFromValidation__": {},
@@ -410,28 +410,6 @@
         "category": "Function",
         "x": 685,
         "y": 160,
-        "wires": [
-            [
-                "sd_y9LnKoKdcGXQibly"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "receipt_Data",
-        "generated": true
-    },
-    {
-        "id": "sd_LU1PH9RfXJPrFRd2",
-        "type": "Script",
-        "z": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "",
-        "script": "bh.status = 404\nbh.result = {\n    message: \"Nothing found\"\n}",
-        "functionName": "sd_LU1PH9RfXJPrFRd2",
-        "category": "Function",
-        "x": 685,
-        "y": 260,
         "wires": [
             [
                 "sd_y9LnKoKdcGXQibly"
@@ -517,6 +495,28 @@
                 "constant": false
             }
         },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "receipt_Data",
+        "generated": true
+    },
+    {
+        "id": "sd_y3iXMrVmRWzVftQE",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_Hgsa2aQVFxKXgGrp",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.status = 404\nbh.result = {\n    message: \"Nothing found\"\n}",
+        "functionName": "sd_y3iXMrVmRWzVftQE",
+        "category": "Function",
+        "x": 685,
+        "y": 280,
+        "wires": [
+            [
+                "sd_y9LnKoKdcGXQibly"
+            ]
+        ],
         "__n_excludedFromValidation__": {},
         "generateNext": false,
         "serviceName": "receipt_Data",

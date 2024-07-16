@@ -65,7 +65,8 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "receipts_File",
-        "functionName": "sd_kmXM5MzwfJXRZLHV"
+        "functionName": "sd_kmXM5MzwfJXRZLHV",
+        "generated": false
     },
     {
         "id": "sd_hkJSWvBTg5Elqv2I",
@@ -212,7 +213,8 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "receipts_File",
-        "functionName": "sd_H1NlNAP1RVDW5ffa"
+        "functionName": "sd_H1NlNAP1RVDW5ffa",
+        "generated": false
     },
     {
         "id": "sd_6viLePdBwxvCAm7o",
@@ -398,281 +400,6 @@
         "generated": true
     },
     {
-        "id": "sd_vaFoJyYT3urKm5So",
-        "type": "HttpIn",
-        "z": "SSD_SERVICE_ID_sd_E65ytoCUunRWk8wH",
-        "viewType": "server",
-        "nodeType": "start",
-        "name": "get-files",
-        "path": "/get-files/:filename",
-        "uploadpath": "",
-        "summary": "",
-        "description": "",
-        "method": "get",
-        "sequenceId": "",
-        "consumes": "",
-        "produces": "",
-        "filetype": "path",
-        "acceptFileUpload": false,
-        "useDataModel": false,
-        "dataModelIsArray": false,
-        "uploadFileOptions": "",
-        "erd": "",
-        "erdName": "",
-        "entity": "",
-        "entityId": "",
-        "ref": "",
-        "editableListData": {
-            "responses": [],
-            "params": [],
-            "produces": [],
-            "consumes": []
-        },
-        "inputs": 0,
-        "outputs": 1,
-        "validateRequestUsingSwaggerDocs": false,
-        "category": "HTTP",
-        "x": 45,
-        "y": 460,
-        "wires": [
-            [
-                "sd_cBTbr7aVUJzY5qWe"
-            ]
-        ],
-        "__ssdTypeInputs__": {
-            "uploadpath": {
-                "type": "str",
-                "value": "",
-                "nullable": "true",
-                "nullableValue": "",
-                "constant": false
-            }
-        },
-        "__n_excludedFromValidation__": {},
-        "generateNext": true,
-        "serviceName": "receipts_File",
-        "functionName": "sd_vaFoJyYT3urKm5So"
-    },
-    {
-        "id": "sd_cBTbr7aVUJzY5qWe",
-        "type": "Script",
-        "z": "SSD_SERVICE_ID_sd_E65ytoCUunRWk8wH",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "",
-        "script": "bh.file = {\n    collection:\"files\"\n}\n\nconsole.log(\"bh file\",bh.file.collection)",
-        "functionName": "sd_cBTbr7aVUJzY5qWe",
-        "category": "Function",
-        "x": 165,
-        "y": 460,
-        "wires": [
-            [
-                "sd_N4ASAe5REMBV59C2"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "receipts_File",
-        "generated": true
-    },
-    {
-        "id": "sd_N4ASAe5REMBV59C2",
-        "type": "CallService",
-        "z": "SSD_SERVICE_ID_sd_E65ytoCUunRWk8wH",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "",
-        "outputs": 1,
-        "isValidNode": true,
-        "noerr": 0,
-        "service": {
-            "id": "SSD_SERVICE_ID_sd_oE6JU2aiEUVDyjZH",
-            "type": "tab",
-            "createdDate": "2024-06-25T10:13:43.508Z",
-            "label": "check_If_Exist",
-            "disabled": false,
-            "info": "",
-            "functionSeq": 0
-        },
-        "flow": {
-            "flowId": "sd_F9CrOrETPPnaRNnz",
-            "flowName": "checkIfExist"
-        },
-        "inputVariables": [
-            {
-                "key": "searchObj",
-                "map": true,
-                "valueType": "bh",
-                "value": "file"
-            }
-        ],
-        "bhVariables": [],
-        "outputMapping": [
-            {
-                "mapVarType": "local",
-                "key": "result",
-                "valueType": "bh",
-                "value": "result",
-                "mapVarName": "result",
-                "localVar": "bh.result"
-            }
-        ],
-        "callService": "./check_If_Exist",
-        "startName": "checkIfExist",
-        "inputParams": [
-            "bh.file"
-        ],
-        "accept_bh": false,
-        "functionName": "sd_N4ASAe5REMBV59C2",
-        "category": "General",
-        "x": 265,
-        "y": 460,
-        "wires": [
-            [
-                "sd_DfjyowIB4RNeWxUM"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "receipts_File",
-        "generated": true
-    },
-    {
-        "id": "sd_DfjyowIB4RNeWxUM",
-        "type": "Switch",
-        "z": "SSD_SERVICE_ID_sd_E65ytoCUunRWk8wH",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "",
-        "property": "result",
-        "propertyType": "bh",
-        "propertyGv": "bh.result",
-        "rules": [
-            {
-                "t": "nempty"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "functionName": "sd_DfjyowIB4RNeWxUM",
-        "category": "Function",
-        "x": 365,
-        "y": 460,
-        "wires": [
-            [
-                "sd_i2kntdlkuLLNzrcp"
-            ],
-            [
-                "sd_DHYhEF9AuW2p1AGD"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "receipts_File",
-        "generated": true
-    },
-    {
-        "id": "sd_i2kntdlkuLLNzrcp",
-        "type": "Script",
-        "z": "SSD_SERVICE_ID_sd_E65ytoCUunRWk8wH",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "",
-        "script": "bh.result = bh.result;\n\nbh.query = bh.input.params\nconsole.log(\"params\", bh.query)\n\nbh.data = bh.result.map(_data =>{\n    return _data.filename\n})\n\nbh.data.forEach((item,i)=>{\n    console.log(\"item\", item)\n   if(item == bh.query.filename)\n   {\n       console.log(\"Found\", bh.result[i])\n       bh.result = bh.result[i]\n\n   }\n})",
-        "functionName": "sd_i2kntdlkuLLNzrcp",
-        "category": "Function",
-        "x": 465,
-        "y": 420,
-        "wires": [
-            [
-                "sd_HkgWL9xpt8JpXxau"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "receipts_File",
-        "generated": true
-    },
-    {
-        "id": "sd_DHYhEF9AuW2p1AGD",
-        "type": "Script",
-        "z": "SSD_SERVICE_ID_sd_E65ytoCUunRWk8wH",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "",
-        "script": "bh.result = {\n    messsage : \"files not found\"\n}",
-        "functionName": "sd_DHYhEF9AuW2p1AGD",
-        "category": "Function",
-        "x": 465,
-        "y": 500,
-        "wires": [
-            [
-                "sd_HkgWL9xpt8JpXxau"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "receipts_File",
-        "generated": true
-    },
-    {
-        "id": "sd_HkgWL9xpt8JpXxau",
-        "type": "HttpOut",
-        "z": "SSD_SERVICE_ID_sd_E65ytoCUunRWk8wH",
-        "viewType": "server",
-        "nodeType": "flow",
-        "name": "",
-        "headers": {},
-        "responseBody": {
-            "type": "bh",
-            "value": "result",
-            "ssd_typedInputField": true
-        },
-        "httpcode": {
-            "type": "num",
-            "value": 200,
-            "ssd_typedInputField": true
-        },
-        "responseType": "obj",
-        "swaggerResponse": {},
-        "responseMapping": {
-            "status": 200,
-            "obj": "bh.result",
-            "send": "bh.result"
-        },
-        "dataModelIsArray": false,
-        "cookies": [],
-        "inputs": 1,
-        "outputs": 0,
-        "erd": "",
-        "entity": "",
-        "entityId": "",
-        "ref": "",
-        "editableListData": {
-            "headers": [],
-            "produces": [],
-            "responses": []
-        },
-        "cookiesList": {},
-        "switchStates": {
-            "headers": "Map",
-            "cookies": "Map"
-        },
-        "functionName": "sd_HkgWL9xpt8JpXxau",
-        "category": "HTTP",
-        "x": 625,
-        "y": 460,
-        "wires": [],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "receipts_File",
-        "generated": true
-    },
-    {
         "id": "sd_xGggKm2GLzc3xfeL",
         "type": "HttpIn",
         "z": "SSD_SERVICE_ID_sd_E65ytoCUunRWk8wH",
@@ -725,7 +452,8 @@
         "__n_excludedFromValidation__": {},
         "generateNext": true,
         "serviceName": "receipts_File",
-        "functionName": "sd_xGggKm2GLzc3xfeL"
+        "functionName": "sd_xGggKm2GLzc3xfeL",
+        "generated": false
     },
     {
         "id": "sd_Z7jmrS6fMYZX0Ao3",
@@ -807,9 +535,9 @@
             ]
         ],
         "__n_excludedFromValidation__": {},
+        "generated": true,
         "generateNext": false,
-        "serviceName": "receipts_File",
-        "generated": true
+        "serviceName": "receipts_File"
     },
     {
         "id": "sd_EtB577Gksc1vG2rL",
@@ -1019,7 +747,8 @@
         },
         "__n_excludedFromValidation__": {},
         "generateNext": true,
-        "serviceName": "receipts_File"
+        "serviceName": "receipts_File",
+        "generated": false
     },
     {
         "id": "sd_85DNNTQUhZ2JNq7A",
@@ -1045,7 +774,8 @@
         },
         "__n_excludedFromValidation__": {},
         "generateNext": true,
-        "serviceName": "receipts_File"
+        "serviceName": "receipts_File",
+        "generated": false
     },
     {
         "id": "sd_xEHB5WqMypBahPEr",
